@@ -29,7 +29,8 @@ static int I = 0;
 
 
 
-static const gpio_num_t BUTTON_IO_NUM 	= gpio_num_t::GPIO_NUM_32;		// Pin 32.
+#define BUTTON_IO_NUM GPIO_NUM_32		// Pin 32.
+#define BUTTON_STOP GPIO_NUM_39		// Pin 39.
 #define GPIO_Q1 GPIO_NUM_19
 #define GPIO_Q2 GPIO_NUM_23
 #define GPIO_Q3 GPIO_NUM_33
@@ -44,6 +45,8 @@ R_TRIG R_TRIG1;
 
 
 TOF TOF1;
+
+TOF_1 TOFR1;
 
 /* Inside .cpp file, app_main function must be declared with C linkage */
 extern "C" void app_main(void)
@@ -64,12 +67,14 @@ extern "C" void app_main(void)
     gpio_reset_pin(GPIO_Q3);
     gpio_reset_pin(GPIO_Q4);
     gpio_reset_pin(BUTTON_IO_NUM);
+    gpio_reset_pin(BUTTON_STOP);
     /* Set the GPIO as a push/pull output */
     gpio_set_direction(GPIO_Q1, GPIO_MODE_OUTPUT);
     gpio_set_direction(GPIO_Q2, GPIO_MODE_OUTPUT);
     gpio_set_direction(GPIO_Q3, GPIO_MODE_OUTPUT);
     gpio_set_direction(GPIO_Q4, GPIO_MODE_OUTPUT);
     gpio_set_direction(BUTTON_IO_NUM, GPIO_MODE_INPUT);
+    gpio_set_direction(BUTTON_STOP, GPIO_MODE_INPUT);
     gpio_set_level(GPIO_Q1, 0); //set to 0 at Reset.
     gpio_set_level(GPIO_Q2, 0); //set to 0 at Reset.
     gpio_set_level(GPIO_Q3, 0); //set to 0 at Reset.
@@ -80,6 +85,7 @@ extern "C" void app_main(void)
     TON1.PT =  500;
 
     TOF1.PT = 1000;
+    TOFR1.PT = 5000;
 
     while (true) {
     	I = !gpio_get_level(BUTTON_IO_NUM);
@@ -95,7 +101,14 @@ extern "C" void app_main(void)
 
     	// TEST TOF
     	TOF1(I);
-        gpio_set_level(GPIO_Q1, TOF1.Q);
+        gpio_set_level(GPIO_Q3, TOF1.Q);
+
+
+
+    	// TEST TOF_1
+		TOFR1.RST = !gpio_get_level(BUTTON_STOP);
+    	TOFR1(I);
+        gpio_set_level(GPIO_Q1, TOFR1.Q);
 
 
         // Test F_TRIG

@@ -141,7 +141,64 @@ bool TOF::operator ()(bool IN)
 
 
 	if (ET >= PT)
+	{
 		Q = false;
+	}
+
+
+	return (Q);
+}
+
+bool TOF_1::operator ()(bool IN)
+{
+	int32_t tx;					/* internal variable */
+
+	/* read system timer */
+	tx = T_PLC_MS();
+
+	// raising Edge
+	if (IN && !M)
+	{
+		ESP_LOGD(TAG, "TON: raising Edge detected");
+		//reset the Timer
+		StartTime = 0;
+	}
+
+	// falling Edge
+	if (!IN && M)
+	{
+		ESP_LOGD(TAG, "TON: falling Edge detected");
+		//Start the Timer
+		StartTime = tx;
+	}
+
+
+	if (IN)
+	{
+		Q = true;
+		ET = 0;
+	}
+	else
+	{
+		ET = tx - StartTime;
+	}
+
+
+	M = IN; //remember old State.
+
+	ESP_LOGV(TAG, "ET %i    PT %i", ET, PT);
+
+
+	if (ET >= PT)
+	{
+		Q = false;
+	}
+
+	if (RST)
+	{
+		Q = false;
+		RST = false;
+	}
 
 
 	return (Q);
