@@ -84,12 +84,12 @@ extern "C" void app_main(void)
 
 
 
-    TON1.PT =  500;
+    TON1.PT =  2000;
 
-    TOF1.PT =  500;
-    TOFR1.PT = 5000;
+    TOF1.PT =  2000;
+    TOFR1.PT = 2000;
 
-    TP1.PT =  500;
+    TP1.PT =  2000;
 
 
     while (true) {
