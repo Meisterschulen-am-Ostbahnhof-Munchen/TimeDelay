@@ -25,15 +25,7 @@ int32_t T_PLC_MS(void) // @suppress("Name convention for function")
 
 
 
-/**
- * \brief
- * Timer on delay.
- *
- * \param	IN starts timer with rising edge, resets timer with falling edge
- * \param   PT time to pass, before Q is set
- * \return	Q is TRUE, PT milliseconds after IN had a rising edge.
- *
- */
+
 bool TON::operator ()(bool IN)
 {
 	int32_t tx;					/* internal variable */
@@ -107,3 +99,53 @@ bool R_TRIG::operator ()(bool CLK)
 	M = CLK; //remember old State.
 	return (Q);
 }
+
+bool TOF::operator ()(bool IN)
+{
+	int32_t tx;					/* internal variable */
+
+	/* read system timer */
+	tx = T_PLC_MS();
+
+	// raising Edge
+	if (IN && !M)
+	{
+		ESP_LOGD(TAG, "TON: raising Edge detected");
+		//reset the Timer
+		StartTime = 0;
+	}
+
+	// falling Edge
+	if (!IN && M)
+	{
+		ESP_LOGD(TAG, "TON: falling Edge detected");
+		//Start the Timer
+		StartTime = tx;
+	}
+
+
+	if (IN)
+	{
+		Q = true;
+		ET = 0;
+	}
+	else
+	{
+		ET = tx - StartTime;
+	}
+
+
+	M = IN; //remember old State.
+
+	ESP_LOGV(TAG, "ET %i    PT %i", ET, PT);
+
+
+	if (ET >= PT)
+		Q = false;
+
+
+	return (Q);
+}
+
+
+

@@ -42,6 +42,9 @@ TON TON4;
 F_TRIG F_TRIG1;
 R_TRIG R_TRIG1;
 
+
+TOF TOF1;
+
 /* Inside .cpp file, app_main function must be declared with C linkage */
 extern "C" void app_main(void)
 {
@@ -75,23 +78,24 @@ extern "C" void app_main(void)
 
 
     TON1.PT =  500;
-    TON2.PT = 1000;
-    TON3.PT = 1500;
-    TON4.PT = 2000;
+
+    TOF1.PT = 1000;
 
     while (true) {
     	I = !gpio_get_level(BUTTON_IO_NUM);
 
+
+
+    	// TEST TON
     	TON1(I);
-    	TON2(I);
-    	TON3(I);
-    	TON4(I);
+        gpio_set_level(GPIO_Q4, TON1.Q);
 
-        gpio_set_level(GPIO_Q1, TON1.Q);
-        gpio_set_level(GPIO_Q2, TON2.Q);
-        gpio_set_level(GPIO_Q3, TON3.Q);
-        gpio_set_level(GPIO_Q4, TON4.Q);
 
+
+
+    	// TEST TOF
+    	TOF1(I);
+        gpio_set_level(GPIO_Q1, TOF1.Q);
 
 
         // Test F_TRIG
