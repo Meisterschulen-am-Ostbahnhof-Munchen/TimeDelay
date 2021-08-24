@@ -10,24 +10,28 @@
 #include <stdio.h>
 #include <string.h>
 
-#include "esp_log.h"
+
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
+#include "hal/gpio_types.h"
 #include "driver/gpio.h"
 #include "sdkconfig.h"
 #include "esp_system.h"
 #include "StandardLib.h"
 
 
+#define LOG_LOCAL_LEVEL ESP_LOG_INFO
+#include "esp_log.h"
+
 static const char *TAG = "impulse_switch";
 static int I = 0;
 static int Q = 0;
 
 
-#define BUTTON_IO_NUM           32		// Pin 32.
-#define BUTTON_ACTIVE_LEVEL     0		//Masse-Geschalten
 
-#define Q_GPIO GPIO_NUM_19
+
+static const gpio_num_t BUTTON_IO_NUM 	= gpio_num_t::GPIO_NUM_32;		// Pin 32.
+static const gpio_num_t Q_GPIO 			= gpio_num_t::GPIO_NUM_19;
 
 
 
