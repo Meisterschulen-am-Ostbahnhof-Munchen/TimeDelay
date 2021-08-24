@@ -39,6 +39,7 @@ TON TON1;
 TON TON2;
 TON TON3;
 TON TON4;
+F_TRIG F_TRIG1;
 
 /* Inside .cpp file, app_main function must be declared with C linkage */
 extern "C" void app_main(void)
@@ -89,6 +90,27 @@ extern "C" void app_main(void)
         gpio_set_level(GPIO_Q2, TON2.Q);
         gpio_set_level(GPIO_Q3, TON3.Q);
         gpio_set_level(GPIO_Q4, TON4.Q);
+
+
+
+        // Test F_TRIG
+
+
+
+        F_TRIG1(I);
+
+        if (F_TRIG1.Q)
+        	ESP_LOGI(TAG, "Falling Edge detected on I ...");
+
+
+
+
+
+
+
+
+
+
         vTaskDelay(100 / portTICK_PERIOD_MS);
     }
 }

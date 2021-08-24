@@ -73,3 +73,19 @@ bool TON::operator ()(bool IN)
 	Q = ET >= PT ? true : false;
 	return (Q);
 }
+
+bool F_TRIG::operator ()(bool CLK) {
+
+	// falling Edge
+	if (!CLK && M)
+	{
+		ESP_LOGD(TAG, "F_TRIG: falling Edge detected");
+		Q = 1;
+	}
+	else
+	{
+		Q = 0;
+	}
+	M = CLK; //remember old State.
+	return (Q);
+}
