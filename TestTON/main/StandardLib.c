@@ -76,7 +76,7 @@ bool TON (bool IN, int32_t PT )
 
 	M = IN; //remember old State.
 
-	ESP_LOGD(TAG, "ET %i    PT %i", ET, PT);
+	ESP_LOGV(TAG, "ET %i    PT %i", ET, PT);
 	return ET >= PT ? true : false;
 }
 
