@@ -8,8 +8,8 @@
 
 #include <stdbool.h>
 #include <stdint.h>
+#include "TimeLib.h"
 #include "StandardLib.h"
-
 
 
 
@@ -18,10 +18,6 @@
 
 static const char *TAG = "StandardLib";
 
-int32_t T_PLC_MS(void) // @suppress("Name convention for function")
-{
-	return (esp_log_timestamp());
-}
 
 
 

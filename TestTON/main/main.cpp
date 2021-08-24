@@ -17,8 +17,9 @@
 #include "driver/gpio.h"
 #include "sdkconfig.h"
 #include "esp_system.h"
+#include "TimeLib.h"
 #include "StandardLib.h"
-
+#include "UtilLib.h"
 
 #define LOG_LOCAL_LEVEL ESP_LOG_INFO
 #include "esp_log.h"
@@ -49,6 +50,8 @@ TOF TOF1;
 TOF_1 TOFR1;
 
 TP TP1;
+
+BLINK BLINK1;
 
 /* Inside .cpp file, app_main function must be declared with C linkage */
 extern "C" void app_main(void)
@@ -92,6 +95,11 @@ extern "C" void app_main(void)
     TP1.PT =  2000;
 
 
+    BLINK1.TIMEHIGH = 200;
+    BLINK1.TIMELOW = 500;
+
+
+
     while (true) {
     	I = !gpio_get_level(BUTTON_IO_NUM);
 
@@ -119,9 +127,12 @@ extern "C" void app_main(void)
 
     	// TEST TP
     	TP1(I);
-        gpio_set_level(GPIO_Q1, TP1.Q);
 
 
+
+    	//TEST BLINK
+    	BLINK1(I);
+    	gpio_set_level(GPIO_Q1, BLINK1.OUT);
 
 
         // Test F_TRIG

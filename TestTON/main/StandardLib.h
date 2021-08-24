@@ -9,8 +9,6 @@
 #define MAIN_STANDARDLIB_H_
 
 
-int32_t T_PLC_MS(void);
-
 
 
 /**
