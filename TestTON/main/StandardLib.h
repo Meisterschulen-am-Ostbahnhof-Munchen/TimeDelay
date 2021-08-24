@@ -39,6 +39,46 @@ private:
 	bool M = false;			/* internal variable */
 };
 
+
+
+
+
+
+/**
+ * \brief
+	Counter Up.
+	CV is incremented by 1 if CU has a rising edge.
+	Q is TRUE, if CV is reached PV.
+ *
+ */
+
+class CTU
+{
+public:
+	//VAR_INPUT
+	bool RESET = false;			/* Reset Counter to 0 */
+	int32_t PV;					/* Counter Limit */
+	//VAR_OUTPUT
+	bool Q = false;				/* Counter reached the Limit */
+	int32_t CV = 0; 			/* Current Counter Value */
+	//call
+	bool operator()(bool CU);/* Count Up */
+private:
+	bool M = false;			/* Variable for CU Edge Detection */
+};
+
+
+
+
+
+
+
+
+
+
+
+
+
 /**
  * \brief
 	Timer on delay.

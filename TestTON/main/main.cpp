@@ -38,20 +38,13 @@ static int I = 0;
 #define GPIO_Q4 GPIO_NUM_25
 
 TON TON1;
-TON TON2;
-TON TON3;
-TON TON4;
 F_TRIG F_TRIG1;
 R_TRIG R_TRIG1;
-
-
 TOF TOF1;
-
 TOF_1 TOFR1;
-
 TP TP1;
-
 BLINK BLINK1;
+CTU CTU1;
 
 /* Inside .cpp file, app_main function must be declared with C linkage */
 extern "C" void app_main(void)
@@ -85,19 +78,15 @@ extern "C" void app_main(void)
     gpio_set_level(GPIO_Q3, 0); //set to 0 at Reset.
     gpio_set_level(GPIO_Q4, 0); //set to 0 at Reset.
 
-
-
     TON1.PT =  2000;
-
     TOF1.PT =  2000;
     TOFR1.PT = 2000;
-
     TP1.PT =  2000;
-
-
     BLINK1.TIMEHIGH = 200;
     BLINK1.TIMELOW = 500;
 
+
+    CTU1.PV = 15;
 
 
     while (true) {
@@ -121,7 +110,7 @@ extern "C" void app_main(void)
     	// TEST TOF_1
 		TOFR1.RST = !gpio_get_level(BUTTON_STOP);
     	TOFR1(I);
-        gpio_set_level(GPIO_Q2, TOFR1.Q);
+
 
 
 
@@ -132,7 +121,7 @@ extern "C" void app_main(void)
 
     	//TEST BLINK
     	BLINK1(I);
-    	gpio_set_level(GPIO_Q1, BLINK1.OUT && I);
+    	gpio_set_level(GPIO_Q2, BLINK1.OUT && I);
 
 
         // Test F_TRIG
@@ -141,10 +130,19 @@ extern "C" void app_main(void)
         	ESP_LOGI(TAG, "Falling Edge detected on I ...");
 
 
+
+        //Test CTU
+        CTU1.RESET = !gpio_get_level(BUTTON_STOP);
+        CTU1(I);
+        gpio_set_level(GPIO_Q1, CTU1.Q);
+
         // Test R_TRIG
         R_TRIG1(I);
         if (R_TRIG1.Q)
-        	ESP_LOGI(TAG, "Rising Edge detected on I ...");
+        	ESP_LOGI(TAG, "Rising Edge detected on I ... ; CTU = %i ", CTU1.CV);
+
+
+
 
 
         vTaskDelay(100 / portTICK_PERIOD_MS);

@@ -238,3 +238,13 @@ bool TP::operator ()(bool IN)
 	M = IN; //remember old State.
 	return (Q);
 }
+
+bool CTU::operator ()(bool CU) {
+	if (RESET)
+		CV = 0;
+	else if (CU && !M)
+		CV++;
+	M = CU; //remember old State.
+	Q = (CV >= PV);
+	return (Q);
+}
