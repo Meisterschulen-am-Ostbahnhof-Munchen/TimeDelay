@@ -132,7 +132,7 @@ extern "C" void app_main(void)
 
     	//TEST BLINK
     	BLINK1(I);
-    	gpio_set_level(GPIO_Q1, BLINK1.OUT);
+    	gpio_set_level(GPIO_Q1, BLINK1.OUT && I);
 
 
         // Test F_TRIG
