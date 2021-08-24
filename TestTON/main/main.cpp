@@ -25,10 +25,6 @@
 
 static const char *TAG = "impulse_switch";
 static int I = 0;
-static int Q1 = 0;
-static int Q2 = 0;
-static int Q3 = 0;
-static int Q4 = 0;
 
 
 
@@ -69,10 +65,10 @@ extern "C" void app_main(void)
     gpio_set_direction(GPIO_Q3, GPIO_MODE_OUTPUT);
     gpio_set_direction(GPIO_Q4, GPIO_MODE_OUTPUT);
     gpio_set_direction(BUTTON_IO_NUM, GPIO_MODE_INPUT);
-    gpio_set_level(GPIO_Q1, Q1); //set to 0 at Reset.
-    gpio_set_level(GPIO_Q2, Q2); //set to 0 at Reset.
-    gpio_set_level(GPIO_Q3, Q3); //set to 0 at Reset.
-    gpio_set_level(GPIO_Q4, Q4); //set to 0 at Reset.
+    gpio_set_level(GPIO_Q1, 0); //set to 0 at Reset.
+    gpio_set_level(GPIO_Q2, 0); //set to 0 at Reset.
+    gpio_set_level(GPIO_Q3, 0); //set to 0 at Reset.
+    gpio_set_level(GPIO_Q4, 0); //set to 0 at Reset.
 
 
 
@@ -84,15 +80,15 @@ extern "C" void app_main(void)
     while (true) {
     	I = !gpio_get_level(BUTTON_IO_NUM);
 
-    	Q1 = TON1(I);
-    	Q2 = TON2(I);
-    	Q3 = TON3(I);
-    	Q4 = TON4(I);
+    	TON1(I);
+    	TON2(I);
+    	TON3(I);
+    	TON4(I);
 
-        gpio_set_level(GPIO_Q1, Q1);
-        gpio_set_level(GPIO_Q2, Q2);
-        gpio_set_level(GPIO_Q3, Q3);
-        gpio_set_level(GPIO_Q4, Q4);
+        gpio_set_level(GPIO_Q1, TON1.Q);
+        gpio_set_level(GPIO_Q2, TON2.Q);
+        gpio_set_level(GPIO_Q3, TON3.Q);
+        gpio_set_level(GPIO_Q4, TON4.Q);
         vTaskDelay(100 / portTICK_PERIOD_MS);
     }
 }
