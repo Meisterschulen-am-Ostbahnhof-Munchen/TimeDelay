@@ -110,7 +110,7 @@ bool TOF::operator ()(bool IN)
 	// raising Edge
 	if (IN && !M)
 	{
-		ESP_LOGD(TAG, "TON: raising Edge detected");
+		ESP_LOGD(TAG, "TOF: raising Edge detected");
 		//reset the Timer
 		StartTime = 0;
 	}
@@ -118,7 +118,7 @@ bool TOF::operator ()(bool IN)
 	// falling Edge
 	if (!IN && M)
 	{
-		ESP_LOGD(TAG, "TON: falling Edge detected");
+		ESP_LOGD(TAG, "TOF: falling Edge detected");
 		//Start the Timer
 		StartTime = tx;
 	}
@@ -159,7 +159,7 @@ bool TOF_1::operator ()(bool IN)
 	// raising Edge
 	if (IN && !M)
 	{
-		ESP_LOGD(TAG, "TON: raising Edge detected");
+		ESP_LOGD(TAG, "TOF_1: raising Edge detected");
 		//reset the Timer
 		StartTime = 0;
 	}
@@ -167,7 +167,7 @@ bool TOF_1::operator ()(bool IN)
 	// falling Edge
 	if (!IN && M)
 	{
-		ESP_LOGD(TAG, "TON: falling Edge detected");
+		ESP_LOGD(TAG, "TOF_1: falling Edge detected");
 		//Start the Timer
 		StartTime = tx;
 	}
@@ -204,5 +204,41 @@ bool TOF_1::operator ()(bool IN)
 	return (Q);
 }
 
+bool TP::operator ()(bool IN)
+{
+	int32_t tx;					/* internal variable */
+
+	/* read system timer */
+	tx = T_PLC_MS();
+
+	// raising Edge
+	if (IN && !M && !Q)
+	{
+		ESP_LOGD(TAG, "TP: raising Edge detected");
+		//Start the Timer
+		StartTime = tx;
+		Q = true;
+	}
 
 
+
+	if (Q)
+	{
+		ET = tx - StartTime;
+	}
+	else
+	{
+		ET = 0;
+		//reset the Timer
+		StartTime = 0;
+	}
+
+
+	if (ET >= PT)
+	{
+		Q = false;
+	}
+
+	M = IN; //remember old State.
+	return (Q);
+}

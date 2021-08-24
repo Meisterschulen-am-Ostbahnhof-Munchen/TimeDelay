@@ -20,7 +20,7 @@ class F_TRIG
 {
 public:
 	//VAR_OUTPUT
-	bool Q;					/* Edge detected */
+	bool Q = false;					/* Edge detected */
 	//call
 	bool operator()(bool CLK); /* is TRUE if falling Edge detection. */
 private:
@@ -34,7 +34,7 @@ class R_TRIG
 {
 public:
 	//VAR_OUTPUT
-	bool Q;					/* Edge detected */
+	bool Q = false;					/* Edge detected */
 	//call
 	bool operator()(bool CLK); /* is TRUE if rising Edge detection. */
 private:
@@ -57,7 +57,7 @@ public:
 	//VAR_INPUT
 	int32_t PT = 0;
 	//VAR_OUTPUT
-	bool Q;					/* is TRUE, PT milliseconds after IN had a rising edge */
+	bool Q = false;					/* is TRUE, PT milliseconds after IN had a rising edge */
 	int32_t ET = 0; 		/* elapsed time */
 	//call
 	bool operator()(bool IN);/* is TRUE, PT milliseconds after IN had a rising edge */
@@ -82,7 +82,7 @@ public:
 	//VAR_INPUT
 	int32_t PT = 0;
 	//VAR_OUTPUT
-	bool Q;					/* Q is FALSE, PT milliseconds after IN had a falling edge */
+	bool Q = false;					/* Q is FALSE, PT milliseconds after IN had a falling edge */
 	int32_t ET = 0; 		/* elapsed time */
 	//call
 	bool operator()(bool IN);/* Q is FALSE, PT milliseconds after IN had a falling edge */
@@ -115,7 +115,7 @@ public:
 	int32_t PT = 0;
 	bool RST = false;
 	//VAR_OUTPUT
-	bool Q;					/* Q is FALSE, PT milliseconds after IN had a falling edge */
+	bool Q = false;					/* Q is FALSE, PT milliseconds after IN had a falling edge */
 	int32_t ET = 0; 		/* elapsed time */
 	//call
 	bool operator()(bool IN);/* Q is FALSE, PT milliseconds after IN had a falling edge */
@@ -125,5 +125,30 @@ private:
 };
 
 
+
+/**
+ * \brief
+	Timer Pulse.
+	Q produces a High-Signal with the length of PT on every rising edge on IN.
+ *
+ * \param	IN Trigger for Start of the Signal
+ * \param   PT The length of the High-Signal in ms
+ * \return	Q is The pulse
+ *
+ */
+class TP
+{
+public:
+	//VAR_INPUT
+	int32_t PT = 0;			/* The length of the High-Signal in ms */
+	//VAR_OUTPUT
+	bool Q = false;					/* The pulse */
+	int32_t ET = 0; 		/* The current phase of the High-Signal  */
+	//call
+	bool operator()(bool IN);/* Q is FALSE, PT milliseconds after IN had a falling edge */
+private:
+	bool M = false;			/* internal variable */
+	int32_t StartTime = 0;	/* internal variable */
+};
 
 #endif /* MAIN_STANDARDLIB_H_ */

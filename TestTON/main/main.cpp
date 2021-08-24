@@ -48,6 +48,8 @@ TOF TOF1;
 
 TOF_1 TOFR1;
 
+TP TP1;
+
 /* Inside .cpp file, app_main function must be declared with C linkage */
 extern "C" void app_main(void)
 {
@@ -84,8 +86,11 @@ extern "C" void app_main(void)
 
     TON1.PT =  500;
 
-    TOF1.PT = 1000;
+    TOF1.PT =  500;
     TOFR1.PT = 5000;
+
+    TP1.PT =  500;
+
 
     while (true) {
     	I = !gpio_get_level(BUTTON_IO_NUM);
@@ -108,7 +113,15 @@ extern "C" void app_main(void)
     	// TEST TOF_1
 		TOFR1.RST = !gpio_get_level(BUTTON_STOP);
     	TOFR1(I);
-        gpio_set_level(GPIO_Q1, TOFR1.Q);
+        gpio_set_level(GPIO_Q2, TOFR1.Q);
+
+
+
+    	// TEST TP
+    	TP1(I);
+        gpio_set_level(GPIO_Q1, TP1.Q);
+
+
 
 
         // Test F_TRIG
@@ -121,14 +134,6 @@ extern "C" void app_main(void)
         R_TRIG1(I);
         if (R_TRIG1.Q)
         	ESP_LOGI(TAG, "Rising Edge detected on I ...");
-
-
-
-
-
-
-
-
 
 
         vTaskDelay(100 / portTICK_PERIOD_MS);
