@@ -19,6 +19,7 @@ private:
 	int32_t StartTime = 0;	/* internal variable */
 public:
 	int32_t PT = 0;
+	bool Q;					/* is TRUE, PT milliseconds after IN had a rising edge */
 	int32_t ET = 0; 		/* elapsed time */
 	bool operator()(bool IN);/* is TRUE, PT milliseconds after IN had a rising edge */
 };

@@ -70,5 +70,6 @@ bool TON::operator ()(bool IN)
 	M = IN; //remember old State.
 
 	ESP_LOGV(TAG, "ET %i    PT %i", ET, PT);
-	return (ET >= PT ? true : false);
+	Q = ET >= PT ? true : false;
+	return (Q);
 }
