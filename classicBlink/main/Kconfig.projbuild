@@ -3,7 +3,7 @@ menu "Example Configuration"
     config BLINK_GPIO
         int "Blink GPIO number"
         range 0 34
-        default 5
+        default 19
         help
             GPIO number (IOxx) to blink on and off.
 

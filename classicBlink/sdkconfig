@@ -128,7 +128,7 @@ CONFIG_PARTITION_TABLE_MD5=y
 #
 # Example Configuration
 #
-CONFIG_BLINK_GPIO=5
+CONFIG_BLINK_GPIO=19
 # end of Example Configuration
 
 #
