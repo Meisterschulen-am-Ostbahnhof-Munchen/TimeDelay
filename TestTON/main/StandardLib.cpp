@@ -248,3 +248,15 @@ bool CTU::operator ()(bool CU) {
 	Q = (CV >= PV);
 	return (Q);
 }
+
+bool SR::operator ()(bool SET1, bool RESET)
+{
+	Q1 = (!RESET && Q1) || SET1;
+	return (Q1);
+}
+
+bool RS::operator ()(bool SET, bool RESET1)
+{
+	Q1 = !RESET1 && (Q1 || SET);
+	return (Q1);
+}

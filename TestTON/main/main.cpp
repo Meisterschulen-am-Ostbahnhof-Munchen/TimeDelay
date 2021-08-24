@@ -25,13 +25,13 @@
 #include "esp_log.h"
 
 static const char *TAG = "impulse_switch";
-static int I = 0;
+static int I1 = 0;
+static int I2 = 0;
 
 
 
-
-#define BUTTON_IO_NUM GPIO_NUM_32		// Pin 32.
-#define BUTTON_STOP GPIO_NUM_39		// Pin 39.
+#define BUTTON_I1 GPIO_NUM_32		// Pin 32.
+#define BUTTON_I2 GPIO_NUM_39		// Pin 39.
 #define GPIO_Q1 GPIO_NUM_19
 #define GPIO_Q2 GPIO_NUM_23
 #define GPIO_Q3 GPIO_NUM_33
@@ -45,6 +45,9 @@ TOF_1 TOFR1;
 TP TP1;
 BLINK BLINK1;
 CTU CTU1;
+
+RS RS1;
+SR SR1;
 
 /* Inside .cpp file, app_main function must be declared with C linkage */
 extern "C" void app_main(void)
@@ -64,15 +67,15 @@ extern "C" void app_main(void)
     gpio_reset_pin(GPIO_Q2);
     gpio_reset_pin(GPIO_Q3);
     gpio_reset_pin(GPIO_Q4);
-    gpio_reset_pin(BUTTON_IO_NUM);
-    gpio_reset_pin(BUTTON_STOP);
+    gpio_reset_pin(BUTTON_I1);
+    gpio_reset_pin(BUTTON_I2);
     /* Set the GPIO as a push/pull output */
     gpio_set_direction(GPIO_Q1, GPIO_MODE_OUTPUT);
     gpio_set_direction(GPIO_Q2, GPIO_MODE_OUTPUT);
     gpio_set_direction(GPIO_Q3, GPIO_MODE_OUTPUT);
     gpio_set_direction(GPIO_Q4, GPIO_MODE_OUTPUT);
-    gpio_set_direction(BUTTON_IO_NUM, GPIO_MODE_INPUT);
-    gpio_set_direction(BUTTON_STOP, GPIO_MODE_INPUT);
+    gpio_set_direction(BUTTON_I1, GPIO_MODE_INPUT);
+    gpio_set_direction(BUTTON_I2, GPIO_MODE_INPUT);
     gpio_set_level(GPIO_Q1, 0); //set to 0 at Reset.
     gpio_set_level(GPIO_Q2, 0); //set to 0 at Reset.
     gpio_set_level(GPIO_Q3, 0); //set to 0 at Reset.
@@ -90,56 +93,68 @@ extern "C" void app_main(void)
 
 
     while (true) {
-    	I = !gpio_get_level(BUTTON_IO_NUM);
-
+    	I1 = !gpio_get_level(BUTTON_I1);
+    	I2 = !gpio_get_level(BUTTON_I2);
 
 
     	// TEST TON
-    	TON1(I);
+    	TON1(I1);
         gpio_set_level(GPIO_Q4, TON1.Q);
 
 
 
 
     	// TEST TOF
-    	TOF1(I);
+    	TOF1(I1);
         gpio_set_level(GPIO_Q3, TOF1.Q);
 
 
 
     	// TEST TOF_1
-		TOFR1.RST = !gpio_get_level(BUTTON_STOP);
-    	TOFR1(I);
+		TOFR1.RST = I2;
+    	TOFR1(I1);
 
 
 
 
     	// TEST TP
-    	TP1(I);
+    	TP1(I1);
 
 
 
     	//TEST BLINK
-    	BLINK1(I);
-    	gpio_set_level(GPIO_Q2, BLINK1.OUT && I);
+    	BLINK1(I1);
+    	gpio_set_level(GPIO_Q2, BLINK1.OUT && I1);
 
 
         // Test F_TRIG
-        F_TRIG1(I);
+        F_TRIG1(I1);
         if (F_TRIG1.Q)
         	ESP_LOGI(TAG, "Falling Edge detected on I ...");
 
 
 
         //Test CTU
-        CTU1.RESET = !gpio_get_level(BUTTON_STOP);
-        CTU1(I);
-        gpio_set_level(GPIO_Q1, CTU1.Q);
+        CTU1.RESET = I2;
+        CTU1(I1);
+
 
         // Test R_TRIG
-        R_TRIG1(I);
+        R_TRIG1(I1);
         if (R_TRIG1.Q)
-        	ESP_LOGI(TAG, "Rising Edge detected on I ... ; CTU = %i ", CTU1.CV);
+        	ESP_LOGI(TAG, "Rising Edge detected on I1 ... ; CTU = %i ", CTU1.CV);
+
+
+
+
+
+
+        //Test RS
+        // Bistable function, reset dominant
+        RS1(I1, I2);
+        gpio_set_level(GPIO_Q1, RS1.Q1);
+
+
 
 
 

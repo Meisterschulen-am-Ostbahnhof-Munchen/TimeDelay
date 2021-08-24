@@ -72,8 +72,39 @@ private:
 
 
 
+/**
+ * \brief
+	Bistable function, set dominant
+	Q1 = SET1 OR (NOT RESET AND Q1)
+ *
+ */
+
+class SR
+{
+public:
+	//VAR_OUTPUT
+	bool Q1 = false;				/* */
+	//call
+	bool operator()(bool SET1, bool RESET);/* Count Up */
+};
 
 
+
+/**
+ * \brief
+	Bistable function, reset dominant
+	Q1 =  NOT RESET1 AND (SET OR Q1)
+ *
+ */
+
+class RS
+{
+public:
+	//VAR_OUTPUT
+	bool Q1 = false;				/**/
+	//call
+	bool operator()(bool SET, bool RESET1);/* Count Up */
+};
 
 
 
