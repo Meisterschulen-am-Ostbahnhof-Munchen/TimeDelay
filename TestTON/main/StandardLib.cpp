@@ -13,7 +13,7 @@
 
 
 
-#define LOG_LOCAL_LEVEL ESP_LOG_DEBUG
+#define LOG_LOCAL_LEVEL ESP_LOG_INFO
 #include "esp_log.h"
 
 static const char *TAG = "StandardLib";
@@ -74,12 +74,30 @@ bool TON::operator ()(bool IN)
 	return (Q);
 }
 
-bool F_TRIG::operator ()(bool CLK) {
+bool F_TRIG::operator ()(bool CLK)
+{
 
 	// falling Edge
 	if (!CLK && M)
 	{
 		ESP_LOGD(TAG, "F_TRIG: falling Edge detected");
+		Q = 1;
+	}
+	else
+	{
+		Q = 0;
+	}
+	M = CLK; //remember old State.
+	return (Q);
+}
+
+bool R_TRIG::operator ()(bool CLK)
+{
+
+	// rising Edge
+	if (CLK && !M)
+	{
+		ESP_LOGD(TAG, "R_TRIG: rising Edge detected");
 		Q = 1;
 	}
 	else

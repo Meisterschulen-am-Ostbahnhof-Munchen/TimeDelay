@@ -27,7 +27,19 @@ private:
 	bool M = false;			/* internal variable */
 };
 
-
+/**
+ * Rising Edge detection.
+ */
+class R_TRIG
+{
+public:
+	//VAR_OUTPUT
+	bool Q;					/* Edge detected */
+	//call
+	bool operator()(bool CLK); /* is TRUE if rising Edge detection. */
+private:
+	bool M = false;			/* internal variable */
+};
 
 
 class TON

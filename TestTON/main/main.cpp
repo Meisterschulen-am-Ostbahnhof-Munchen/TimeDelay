@@ -40,6 +40,7 @@ TON TON2;
 TON TON3;
 TON TON4;
 F_TRIG F_TRIG1;
+R_TRIG R_TRIG1;
 
 /* Inside .cpp file, app_main function must be declared with C linkage */
 extern "C" void app_main(void)
@@ -94,13 +95,15 @@ extern "C" void app_main(void)
 
 
         // Test F_TRIG
-
-
-
         F_TRIG1(I);
-
         if (F_TRIG1.Q)
         	ESP_LOGI(TAG, "Falling Edge detected on I ...");
+
+
+        // Test R_TRIG
+        R_TRIG1(I);
+        if (R_TRIG1.Q)
+        	ESP_LOGI(TAG, "Rising Edge detected on I ...");
 
 
 
