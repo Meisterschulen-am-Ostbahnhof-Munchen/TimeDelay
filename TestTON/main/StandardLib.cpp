@@ -18,9 +18,9 @@
 
 static const char *TAG = "StandardLib";
 
-int32_t T_PLC_MS(void)
+int32_t T_PLC_MS(void) // @suppress("Name convention for function")
 {
-	return esp_log_timestamp();
+	return (esp_log_timestamp());
 }
 
 
@@ -34,18 +34,12 @@ int32_t T_PLC_MS(void)
  * \return	Q is TRUE, PT milliseconds after IN had a rising edge.
  *
  */
-bool TON (bool IN, int32_t PT )
+bool TON::operator ()(bool IN)
 {
-	//static bool Q;				/* is TRUE, PT milliseconds after IN had a rising edge */
-	static int32_t ET = 0; 			/* elapsed time */
-	static bool M = false;				/* internal variable */
-	static int32_t StartTime = 0;	/* internal variable */
 	int32_t tx;					/* internal variable */
-
 
 	/* read system timer */
 	tx = T_PLC_MS();
-
 
 	// raising Edge
 	if (IN && !M)
@@ -64,7 +58,6 @@ bool TON (bool IN, int32_t PT )
 	}
 
 
-
 	if (IN)
 	{
 		ET = tx - StartTime;
@@ -77,7 +70,5 @@ bool TON (bool IN, int32_t PT )
 	M = IN; //remember old State.
 
 	ESP_LOGV(TAG, "ET %i    PT %i", ET, PT);
-	return ET >= PT ? true : false;
+	return (ET >= PT ? true : false);
 }
-
-

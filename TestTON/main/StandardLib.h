@@ -10,7 +10,18 @@
 
 
 int32_t T_PLC_MS(void);
-bool TON (bool IN, int32_t PT );
+
+
+class TON
+{
+private:
+	bool M = false;			/* internal variable */
+	int32_t StartTime = 0;	/* internal variable */
+public:
+	int32_t PT = 0;
+	int32_t ET = 0; 		/* elapsed time */
+	bool operator()(bool IN);/* is TRUE, PT milliseconds after IN had a rising edge */
+};
 
 
 #endif /* MAIN_STANDARDLIB_H_ */
