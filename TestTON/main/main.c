@@ -60,6 +60,7 @@ bool TON (bool IN, int32_t PT )
 	/* read system timer */
 	tx = T_PLC_MS();
 
+
 	// raising Edge
 	if (IN && !M)
 	{
@@ -77,7 +78,16 @@ bool TON (bool IN, int32_t PT )
 	}
 
 
-	ET = tx - StartTime;
+
+	if (IN)
+	{
+		ET = tx - StartTime;
+	}
+	else
+	{
+		ET = 0;
+	}
+
 	M = IN; //remember old State.
 
 	ESP_LOGD(TAG, "ET %i    PT %i", ET, PT);
@@ -109,7 +119,7 @@ void app_main(void)
     while (true) {
     	I = !gpio_get_level(BUTTON_IO_NUM);
 
-    	Q = TON(I, 200);
+    	Q = TON(I, 500);
 
         gpio_set_level(Q_GPIO, Q);
         vTaskDelay(100 / portTICK_PERIOD_MS);
