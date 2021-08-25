@@ -20,6 +20,8 @@
 #include "TimeLib.h"
 #include "StandardLib.h"
 #include "UtilLib.h"
+#include "ExtraLib.h"
+#include "BasicLib.h"
 
 #define LOG_LOCAL_LEVEL ESP_LOG_INFO
 #include "esp_log.h"
@@ -151,8 +153,11 @@ extern "C" void app_main(void)
 
         //Test RS
         // Bistable function, reset dominant
+        //Test SR
+        // Bistable function, set dominant
         RS1(I1, I2);
-        gpio_set_level(GPIO_Q1, RS1.Q1);
+        SR1(I1, I2);
+        gpio_set_level(GPIO_Q1, SR1.Q1);
 
 
 
