@@ -29,7 +29,6 @@
 static const char *TAG = "impulse_switch";
 static int I1 = 0;
 static int I2 = 0;
-static bool I3 = 0;
 
 
 #define BUTTON_I1 GPIO_NUM_32		// Pin 32.
@@ -41,7 +40,7 @@ static bool I3 = 0;
 
 
 
-CLK_DIV CLK_DIV1;
+CLK_N CLK_N1;
 
 
 
@@ -78,7 +77,7 @@ extern "C" void app_main(void)
     gpio_set_level(GPIO_Q4, 0); //set to 0 at Reset.
 
 
-
+    CLK_N1.N = 10;  //1 Impulse all 1024 ms.
 
 
     while (true) {
@@ -86,15 +85,12 @@ extern "C" void app_main(void)
     	I2 = !gpio_get_level(BUTTON_I2);
 
 
-    	I3 = !I3; //Generate a square wave signal.
 
-    	CLK_DIV1(I3);
 
-        gpio_set_level(GPIO_Q1, CLK_DIV1.Q0);
-        gpio_set_level(GPIO_Q2, CLK_DIV1.Q1);
-        gpio_set_level(GPIO_Q3, CLK_DIV1.Q2);
-        gpio_set_level(GPIO_Q4, CLK_DIV1.Q3);
 
+
+    	if (CLK_N1())
+    	    ESP_LOGI(TAG, "SIGNAL !");
 
 
 
