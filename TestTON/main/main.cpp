@@ -92,17 +92,15 @@ extern "C" void app_main(void)
     	I1 = !gpio_get_level(BUTTON_I1);
     	I2 = !gpio_get_level(BUTTON_I2);
 
-    	CLICK_DEC1(I1);
 
 
 
+    	//CLICK_DEC1(I1);
 
-
-
-        gpio_set_level(GPIO_Q1, TP1(CLICK_DEC1.Q1));
-        gpio_set_level(GPIO_Q2, TP2(CLICK_DEC1.Q2));
-        gpio_set_level(GPIO_Q3, TP3(CLICK_DEC1.Q3));
-        gpio_set_level(GPIO_Q4, TP0(CLICK_DEC1.Q0));
+        gpio_set_level(GPIO_Q1, TP1(I1));
+        //gpio_set_level(GPIO_Q2, TP2(CLICK_DEC1.Q2));
+        //gpio_set_level(GPIO_Q3, TP3(CLICK_DEC1.Q3));
+        //gpio_set_level(GPIO_Q4, TP0(CLICK_DEC1.Q0));
 
 
 
