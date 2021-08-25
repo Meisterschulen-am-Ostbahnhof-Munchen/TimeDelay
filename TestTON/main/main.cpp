@@ -95,17 +95,17 @@ extern "C" void app_main(void)
 
 
 
-    	//CLICK_DEC1(I1);
+    	CLICK_DEC1(I1);
 
-        gpio_set_level(GPIO_Q1, TP1(I1));
-        //gpio_set_level(GPIO_Q2, TP2(CLICK_DEC1.Q2));
-        //gpio_set_level(GPIO_Q3, TP3(CLICK_DEC1.Q3));
-        //gpio_set_level(GPIO_Q4, TP0(CLICK_DEC1.Q0));
-
-
+        gpio_set_level(GPIO_Q1, TP1(CLICK_DEC1.Q1));
+        gpio_set_level(GPIO_Q2, TP2(CLICK_DEC1.Q2));
+        gpio_set_level(GPIO_Q3, TP3(CLICK_DEC1.Q3));
+        gpio_set_level(GPIO_Q4, TP0(CLICK_DEC1.Q0));
 
 
-        vTaskDelay(10 / portTICK_PERIOD_MS);
+
+
+        vTaskDelay(100 / portTICK_PERIOD_MS);
     }
 }
 
