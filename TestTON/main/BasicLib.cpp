@@ -89,8 +89,19 @@ bool CLK_N::operator ()(void) {
 	return (Q);
 }
 
+bool CLK_PRG::operator ()(void) {
+	/* read system time */
+	TX = T_PLC_MS();
 
+	/* initialize on startup */
+	if (!INIT)
+	{
+		INIT = true;
+		LAST = TX - PT;
+	}
 
-
-
-
+	/* generate output pulse when next_pulse is reached */
+	Q = TX - LAST >= PT;
+	if (Q) LAST = TX;
+	return (Q);
+}

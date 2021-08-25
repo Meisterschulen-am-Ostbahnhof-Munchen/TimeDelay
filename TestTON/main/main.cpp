@@ -40,7 +40,7 @@ static int I2 = 0;
 
 
 
-CLK_N CLK_N1;
+CLK_PRG CLK_PRG1;
 
 
 
@@ -77,7 +77,7 @@ extern "C" void app_main(void)
     gpio_set_level(GPIO_Q4, 0); //set to 0 at Reset.
 
 
-    CLK_N1.N = 10;  //1 Impulse all 1024 ms.
+    CLK_PRG1.PT = 1000;  //1 Impulse all 1000 ms.
 
 
     while (true) {
@@ -89,7 +89,7 @@ extern "C" void app_main(void)
 
 
 
-    	if (CLK_N1())
+    	if (CLK_PRG1())
     	    ESP_LOGI(TAG, "SIGNAL !");
 
 

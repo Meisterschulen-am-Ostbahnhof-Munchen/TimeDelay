@@ -96,7 +96,30 @@ private:
 };
 
 
+/**
+ *
 
+
+clk_prg uses the internal sps time to generate a clock with programmable period time.
+the first cycle after start is a clk pulse and then depending on the programmed period time a delay.
+every pulse is only valid for one cycle.
+the accuracy of clk_prg is depending on the accuracy of the system clock.
+ *
+ */
+class CLK_PRG
+{
+public:
+	//VAR_INPUT
+	int32_t PT = 10;			/* TIME */
+	//VAR_OUTPUT
+	bool Q = false;			    /* Tick */
+	//call
+	bool operator()(void);
+private:
+	bool INIT;
+	int32_t LAST;
+	int32_t TX;
+};
 
 
 
