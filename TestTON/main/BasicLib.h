@@ -25,14 +25,16 @@ public:
 	//VAR_INPUT
 	int32_t TC = 0;			/* TIME */
 	//VAR_OUTPUT
-	bool Q0 = false;			/* output signal rising edge without falling edge */
-	bool Q1 = false;			/* output signal of a pulse within TC */
-	bool Q2 = false;			/* output signal of a pulse within TC */
-	bool Q3 = false;			/* output signal of a pulse within TC */
+	bool Q0 = false;		/* output signal rising edge without falling edge */
+	bool Q1 = false;		/* output signal of a pulse within TC */
+	bool Q2 = false;		/* output signal of a pulse within TC */
+	bool Q3 = false;		/* output signal of a pulse within TC */
 	//call
 	bool operator()(bool IN);/* Q is FALSE, PT milliseconds after IN had a falling edge */
 private:
-	bool M = false;			/* internal variable */
+	TP TX;					/* internal variable */
+	bool EDGE = false;			/* internal variable */
+	int32_t CNT = -1;			/* TIME */
 };
 
 
