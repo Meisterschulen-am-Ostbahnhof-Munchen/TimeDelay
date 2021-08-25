@@ -20,6 +20,8 @@
 #include "TimeLib.h"
 #include "StandardLib.h"
 #include "UtilLib.h"
+#include "ExtraLib.h"
+#include "BasicLib.h"
 
 #define LOG_LOCAL_LEVEL ESP_LOG_INFO
 #include "esp_log.h"
@@ -29,7 +31,6 @@ static int I1 = 0;
 static int I2 = 0;
 
 
-
 #define BUTTON_I1 GPIO_NUM_32		// Pin 32.
 #define BUTTON_I2 GPIO_NUM_39		// Pin 39.
 #define GPIO_Q1 GPIO_NUM_19
@@ -37,17 +38,12 @@ static int I2 = 0;
 #define GPIO_Q3 GPIO_NUM_33
 #define GPIO_Q4 GPIO_NUM_25
 
-TON TON1;
-F_TRIG F_TRIG1;
-R_TRIG R_TRIG1;
-TOF TOF1;
-TOF_1 TOFR1;
-TP TP1;
-BLINK BLINK1;
-CTU CTU1;
 
-RS RS1;
-SR SR1;
+
+
+
+CYCLE_4 CYCLE_4A;
+DIVIDE DIVIDE1;
 
 /* Inside .cpp file, app_main function must be declared with C linkage */
 extern "C" void app_main(void)
@@ -81,15 +77,6 @@ extern "C" void app_main(void)
     gpio_set_level(GPIO_Q3, 0); //set to 0 at Reset.
     gpio_set_level(GPIO_Q4, 0); //set to 0 at Reset.
 
-    TON1.PT =  2000;
-    TOF1.PT =  2000;
-    TOFR1.PT = 2000;
-    TP1.PT =  2000;
-    BLINK1.TIMEHIGH = 200;
-    BLINK1.TIMELOW = 500;
-
-
-    CTU1.PV = 15;
 
 
     while (true) {
@@ -97,67 +84,17 @@ extern "C" void app_main(void)
     	I2 = !gpio_get_level(BUTTON_I2);
 
 
-    	// TEST TON
-    	TON1(I1);
-        gpio_set_level(GPIO_Q4, TON1.Q);
 
 
+    	CYCLE_4A.SL = I1;
+    	CYCLE_4A();
+    	DIVIDE1(CYCLE_4A.STATE);
+        ESP_LOGI(TAG, "STATE %i ", CYCLE_4A.STATE);
 
-
-    	// TEST TOF
-    	TOF1(I1);
-        gpio_set_level(GPIO_Q3, TOF1.Q);
-
-
-
-    	// TEST TOF_1
-		TOFR1.RST = I2;
-    	TOFR1(I1);
-
-
-
-
-    	// TEST TP
-    	TP1(I1);
-
-
-
-    	//TEST BLINK
-    	BLINK1(I1);
-    	gpio_set_level(GPIO_Q2, BLINK1.OUT && I1);
-
-
-        // Test F_TRIG
-        F_TRIG1(I1);
-        if (F_TRIG1.Q)
-        	ESP_LOGI(TAG, "Falling Edge detected on I ...");
-
-
-
-        //Test CTU
-        CTU1.RESET = I2;
-        CTU1(I1);
-
-
-        // Test R_TRIG
-        R_TRIG1(I1);
-        if (R_TRIG1.Q)
-        	ESP_LOGI(TAG, "Rising Edge detected on I1 ... ; CTU = %i ", CTU1.CV);
-
-
-
-
-
-
-        //Test RS
-        // Bistable function, reset dominant
-        RS1(I1, I2);
-        gpio_set_level(GPIO_Q1, RS1.Q1);
-
-
-
-
-
+        gpio_set_level(GPIO_Q1, DIVIDE1.Q1);
+        gpio_set_level(GPIO_Q2, DIVIDE1.Q2);
+        gpio_set_level(GPIO_Q3, DIVIDE1.Q3);
+        gpio_set_level(GPIO_Q4, DIVIDE1.Q4);
 
 
         vTaskDelay(100 / portTICK_PERIOD_MS);
