@@ -29,7 +29,7 @@
 static const char *TAG = "impulse_switch";
 static int I1 = 0;
 static int I2 = 0;
-
+static bool I3 = 0;
 
 
 #define BUTTON_I1 GPIO_NUM_32		// Pin 32.
@@ -41,11 +41,8 @@ static int I2 = 0;
 
 
 
-CLICK_DEC CLICK_DEC1;
-TP TP0;
-TP TP1;
-TP TP2;
-TP TP3;
+CLK_DIV CLK_DIV1;
+
 
 
 /* Inside .cpp file, app_main function must be declared with C linkage */
@@ -80,11 +77,7 @@ extern "C" void app_main(void)
     gpio_set_level(GPIO_Q3, 0); //set to 0 at Reset.
     gpio_set_level(GPIO_Q4, 0); //set to 0 at Reset.
 
-    CLICK_DEC1.TC = 1000;
-    TP1.PT = 200;
-    TP2.PT = 200;
-    TP3.PT = 200;
-    TP0.PT = 200;
+
 
 
 
@@ -93,14 +86,14 @@ extern "C" void app_main(void)
     	I2 = !gpio_get_level(BUTTON_I2);
 
 
+    	I3 = !I3; //Generate a square wave signal.
 
+    	CLK_DIV1(I3);
 
-    	CLICK_DEC1(I1);
-
-        gpio_set_level(GPIO_Q1, TP1(CLICK_DEC1.Q1));
-        gpio_set_level(GPIO_Q2, TP2(CLICK_DEC1.Q2));
-        gpio_set_level(GPIO_Q3, TP3(CLICK_DEC1.Q3));
-        gpio_set_level(GPIO_Q4, TP0(CLICK_DEC1.Q0));
+        gpio_set_level(GPIO_Q1, CLK_DIV1.Q0);
+        gpio_set_level(GPIO_Q2, CLK_DIV1.Q1);
+        gpio_set_level(GPIO_Q3, CLK_DIV1.Q2);
+        gpio_set_level(GPIO_Q4, CLK_DIV1.Q3);
 
 
 

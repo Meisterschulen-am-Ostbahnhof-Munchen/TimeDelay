@@ -50,7 +50,47 @@ bool CLICK_DEC::operator ()(bool IN)
 	EDGE = IN;
 	TX.PT = TC;
 	TX(IN); //Call TX
-	return (Q0);
-
-
+	return (Q1);
 }
+
+bool CLK_DIV::operator ()(bool CLK) {
+	if(RST)
+	{
+		CNT = 0;
+		Q0  = 0;
+		Q1  = 0;
+		Q2  = 0;
+		Q3  = 0;
+		Q4  = 0;
+		Q5  = 0;
+		Q6  = 0;
+		Q7  = 0;
+	}
+	else if(CLK)
+	{
+		CNT = CNT    +1;
+		Q0  = CNT &   1;
+		Q1  = CNT &   2;
+		Q2  = CNT &   4;
+		Q3  = CNT &   8;
+		Q4  = CNT &  16;
+		Q5  = CNT &  32;
+		Q6  = CNT &  64;
+		Q7  = CNT & 128;
+	}
+	return (Q0);
+}
+
+bool CLK_N::operator ()(void) {
+	STIME = T_PLC_MS() >> N;
+	CLK = STIME & 1;
+	Q = CLK ^ EDGE;
+	EDGE = CLK;
+	return (Q);
+}
+
+
+
+
+
+

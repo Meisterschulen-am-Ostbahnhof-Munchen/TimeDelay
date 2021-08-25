@@ -38,5 +38,71 @@ private:
 };
 
 
+/**
+ *
+this is a clock divider
+each output divides the signal by 2
+Q0 = clk / 2 , Q1 = Q0 / 2 and so on.
+the outputs have a 50% duty cycle each.
+ */
+
+class CLK_DIV
+{
+public:
+	//VAR_INPUT
+	bool RST = false;		/* Reset input */
+	//VAR_OUTPUT
+	bool Q0 = false;		/* divider output CLK / 2 */
+	bool Q1 = false;		/* divider output CLK / 4 */
+	bool Q2 = false;		/* divider output CLK / 8) */
+	bool Q3 = false;		/* divider output CLK / 16) */
+	bool Q4 = false;		/* divider output CLK / 32) */
+	bool Q5 = false;		/* divider output CLK / 64) */
+	bool Q6 = false;		/* divider output CLK / 128) */
+	bool Q7 = false;		/* divider output CLK / 256) */
+	//call
+	bool operator()(bool CLK);/* Q is FALSE, PT milliseconds after IN had a falling edge */
+private:
+	uint8_t CNT = 0;			/* counter */
+};
+
+
+
+
+/**
+ *
+clk_N uses the internal sps time to generate one pulse every N ms
+every pulse is only valid for one cycle so that a edge trigger is not necessary
+clk_N generates pulses depending on the accuracy of the system clock.
+The input N controlls the period time of the clock.
+N=0 equals 1ms, N=1 equals 2ms, N=2 equals 4ms, N=3 equals 8ms ....
+
+be careful, 1ms clocks will only work on very powerful sps cpu's
+ *
+ */
+class CLK_N
+{
+public:
+	//VAR_INPUT
+	int32_t N = 0;			/* N=0 equals 1ms, N=1 equals 2ms, N=2 equals 4ms, N=3 equals 8ms .... */
+	//VAR_OUTPUT
+	bool Q = false;			/* divider output CLK / 2 */
+	//call
+	bool operator()(void);
+private:
+	bool EDGE = 0;
+	int32_t STIME = 0;
+	bool CLK = 0;
+};
+
+
+
+
+
+
+
+
+
+
 
 #endif /* MAIN_BASICLIB_H_ */
