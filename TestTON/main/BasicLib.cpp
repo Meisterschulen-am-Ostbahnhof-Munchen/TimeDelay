@@ -24,26 +24,33 @@ bool CLICK_DEC::operator ()(bool IN)
 		Q3 = false;
 	}
 
-	IF in AND NOT edge AND NOT tx.q THEN
+	if (IN && !EDGE && !TX.Q)
+	{
 		/* a rising edge on in sets the counter to 0 */
-		cnt := 0;
-	ELSIF tx.Q AND NOT IN AND edge THEN
+		CNT = 0;
+	}
+	else if (TX.Q && !IN && EDGE)
+	{
 		/* count falling edges when tp.q is true */
-		cnt := cnt + 1;
-	ELSIF NOT tx.Q THEN
-		CASE cnt OF
-			0 : Q0 := TRUE;
-			1 : Q1 := TRUE;
-			2 : Q2 := TRUE;
-			3 : Q3 := TRUE;
-		END_CASE;
-		cnt := -1;
-	END_IF;
+		CNT++;
+	}
+	else if (!TX.Q)
+	{
+		switch (CNT) {
+		case 0 : Q0 = true; break;
+		case 1 : Q1 = true; break;
+		case 2 : Q2 = true; break;
+		case 3 : Q3 = true; break;
+		default:			break;
+		}
+		CNT = -1;
+	};
 
 	/* remember the status of IN */
-	edge := IN;
-	tx(in := IN, pt := TC);
-
+	EDGE = IN;
+	TX.PT = TC;
+	TX(IN); //Call TX
+	return (Q0);
 
 
 }

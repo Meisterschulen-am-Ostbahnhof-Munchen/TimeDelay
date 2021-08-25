@@ -39,17 +39,14 @@ static int I2 = 0;
 #define GPIO_Q3 GPIO_NUM_33
 #define GPIO_Q4 GPIO_NUM_25
 
-TON TON1;
-F_TRIG F_TRIG1;
-R_TRIG R_TRIG1;
-TOF TOF1;
-TOF_1 TOFR1;
-TP TP1;
-BLINK BLINK1;
-CTU CTU1;
 
-RS RS1;
-SR SR1;
+
+CLICK_DEC CLICK_DEC1;
+TP TP0;
+TP TP1;
+TP TP2;
+TP TP3;
+
 
 /* Inside .cpp file, app_main function must be declared with C linkage */
 extern "C" void app_main(void)
@@ -83,89 +80,34 @@ extern "C" void app_main(void)
     gpio_set_level(GPIO_Q3, 0); //set to 0 at Reset.
     gpio_set_level(GPIO_Q4, 0); //set to 0 at Reset.
 
-    TON1.PT =  2000;
-    TOF1.PT =  2000;
-    TOFR1.PT = 2000;
-    TP1.PT =  2000;
-    BLINK1.TIMEHIGH = 200;
-    BLINK1.TIMELOW = 500;
+    CLICK_DEC1.TC = 1000;
+    TP1.PT = 200;
+    TP2.PT = 200;
+    TP3.PT = 200;
+    TP0.PT = 200;
 
-
-    CTU1.PV = 15;
 
 
     while (true) {
     	I1 = !gpio_get_level(BUTTON_I1);
     	I2 = !gpio_get_level(BUTTON_I2);
 
-
-    	// TEST TON
-    	TON1(I1);
-        gpio_set_level(GPIO_Q4, TON1.Q);
-
-
-
-
-    	// TEST TOF
-    	TOF1(I1);
-        gpio_set_level(GPIO_Q3, TOF1.Q);
-
-
-
-    	// TEST TOF_1
-		TOFR1.RST = I2;
-    	TOFR1(I1);
-
-
-
-
-    	// TEST TP
-    	TP1(I1);
-
-
-
-    	//TEST BLINK
-    	BLINK1(I1);
-    	gpio_set_level(GPIO_Q2, BLINK1.OUT && I1);
-
-
-        // Test F_TRIG
-        F_TRIG1(I1);
-        if (F_TRIG1.Q)
-        	ESP_LOGI(TAG, "Falling Edge detected on I ...");
-
-
-
-        //Test CTU
-        CTU1.RESET = I2;
-        CTU1(I1);
-
-
-        // Test R_TRIG
-        R_TRIG1(I1);
-        if (R_TRIG1.Q)
-        	ESP_LOGI(TAG, "Rising Edge detected on I1 ... ; CTU = %i ", CTU1.CV);
+    	CLICK_DEC1(I1);
 
 
 
 
 
 
-        //Test RS
-        // Bistable function, reset dominant
-        //Test SR
-        // Bistable function, set dominant
-        RS1(I1, I2);
-        SR1(I1, I2);
-        gpio_set_level(GPIO_Q1, SR1.Q1);
+        gpio_set_level(GPIO_Q1, TP1(CLICK_DEC1.Q1));
+        gpio_set_level(GPIO_Q2, TP2(CLICK_DEC1.Q2));
+        gpio_set_level(GPIO_Q3, TP3(CLICK_DEC1.Q3));
+        gpio_set_level(GPIO_Q4, TP0(CLICK_DEC1.Q0));
 
 
 
 
-
-
-
-        vTaskDelay(100 / portTICK_PERIOD_MS);
+        vTaskDelay(10 / portTICK_PERIOD_MS);
     }
 }
 
