@@ -156,4 +156,35 @@ private:
 
 
 
+
+
+class CYCLE_4
+{
+public:
+	//VAR_INPUT
+	bool E = true;
+	int32_t T0 = 500;
+	int32_t T1 = 1000;
+	int32_t T2 = 1500;
+	int32_t T3 = 2000;
+	bool S0 = false;
+	int32_t SX = 0;
+	bool SL = false;
+	//VAR_OUTPUT
+	int32_t STATE = 0;
+	//call
+	int32_t operator()(void);
+private:
+	bool INIT = false;
+	int32_t TX = 0;
+	int32_t LAST = 0;
+};
+
+
+
+
+
+
+
+
 #endif /* MAIN_BASICLIB_H_ */

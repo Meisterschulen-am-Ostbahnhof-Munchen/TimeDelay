@@ -8,30 +8,26 @@
 #ifndef MAIN_EXTRALIB_H_
 #define MAIN_EXTRALIB_H_
 
-
 /**
- * \brief
-	Timer of delay.
-	Q is FALSE, PT milliseconds after IN had a falling edge.
  *
- * \param	IN starts timer with rising edge, resets timer with falling edge
- * \param   PT time to pass, before Q is set
- * \return	Q is FALSE, PT seconds after IN had a falling edge
- *
+this is a divider
  */
-class DBP
+
+class DIVIDE
 {
 public:
-	//VAR_INPUT
-	int32_t PT = 0;
 	//VAR_OUTPUT
-	bool Q = false;					/* Q is FALSE, PT milliseconds after IN had a falling edge */
-	int32_t ET = 0; 		/* elapsed time */
+	bool Q0 = false;		/* divider output */
+	bool Q1 = false;		/* divider output */
+	bool Q2 = false;		/* divider output */
+	bool Q3 = false;		/* divider output */
+	bool Q4 = false;		/* divider output */
+	bool Q5 = false;		/* divider output */
+	bool Q6 = false;		/* divider output */
+	bool Q7 = false;		/* divider output */
 	//call
-	bool operator()(bool IN);/* Q is FALSE, PT milliseconds after IN had a falling edge */
-private:
-	bool M = false;			/* internal variable */
-	int32_t StartTime = 0;	/* internal variable */
+	bool operator()(int32_t IN);/* Q is FALSE, PT milliseconds after IN had a falling edge */
+
 };
 
 

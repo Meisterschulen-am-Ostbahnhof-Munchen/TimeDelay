@@ -40,10 +40,10 @@ static int I2 = 0;
 
 
 
-CLK_PULSE CLK_PULSE1;
-TP TP1;
 
 
+CYCLE_4 CYCLE_4A;
+DIVIDE DIVIDE1;
 
 /* Inside .cpp file, app_main function must be declared with C linkage */
 extern "C" void app_main(void)
@@ -78,9 +78,6 @@ extern "C" void app_main(void)
     gpio_set_level(GPIO_Q4, 0); //set to 0 at Reset.
 
 
-    CLK_PULSE1.PT = 500;   	//Impulse all 500 ms.
-    CLK_PULSE1.N  = 5;
-    TP1.PT = 200;	 		//100ms Impulsdauer
 
     while (true) {
     	I1 = !gpio_get_level(BUTTON_I1);
@@ -89,14 +86,15 @@ extern "C" void app_main(void)
 
 
 
+    	CYCLE_4A.SL = I1;
+    	CYCLE_4A();
+    	DIVIDE1(CYCLE_4A.STATE);
+        ESP_LOGI(TAG, "STATE %i ", CYCLE_4A.STATE);
 
-    	CLK_PULSE1.RST = I1;
-
-
-
-    	CLK_PULSE1();
-    	// CLK_PULSE makes 1 Cycle ON,  TP Extends this Pulse.
-        gpio_set_level(GPIO_Q1, TP1(CLK_PULSE1.Q));
+        gpio_set_level(GPIO_Q1, DIVIDE1.Q1);
+        gpio_set_level(GPIO_Q2, DIVIDE1.Q2);
+        gpio_set_level(GPIO_Q3, DIVIDE1.Q3);
+        gpio_set_level(GPIO_Q4, DIVIDE1.Q4);
 
 
         vTaskDelay(100 / portTICK_PERIOD_MS);

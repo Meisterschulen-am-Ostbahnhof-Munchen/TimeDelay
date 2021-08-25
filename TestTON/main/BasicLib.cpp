@@ -9,6 +9,7 @@
 
 #include <stdbool.h>
 #include <stdint.h>
+#include "Operators.h"
 #include "TimeLib.h"
 #include "StandardLib.h"
 #include "BasicLib.h"
@@ -99,7 +100,7 @@ bool CLK_PRG::operator ()(void) {
 	/* read system time */
 	TX = T_PLC_MS();
 
-	/* initialize on startup */
+	/* INITialize on startup */
 	if (!INIT)
 	{
 		INIT = true;
@@ -134,3 +135,77 @@ bool CLK_PULSE::operator ()(void) {
 	ESP_LOGD(TAG, "CLK_PULSE: CNT = %i", CNT);
 	return (Q);
 }
+
+
+
+
+
+int32_t CYCLE_4::operator ()(void)
+{
+	/* read system timer */
+	TX = T_PLC_MS();
+	/* INIT on first cycle */
+	if (!INIT)
+	{
+		INIT = true;
+		LAST = TX;
+	}
+
+	if (E)
+	{
+		if (SL)
+		{
+			/* when sx > 0 then the STATE sx is forced to start */
+			STATE= LIMIT(0,SX,3);
+			LAST = TX;
+			/* this is to avoid to reset sx from the calling programm it does work fine on codesys but i am not sure about other systems, because we are writing to an input */
+			SL = false;
+		}
+		else
+		{
+			switch(STATE)
+			{
+			case 0 :	/* wait for T0 and switch to next cycle */
+				if( TX - LAST >= T0 )
+				{
+						STATE = 1;
+						LAST = TX;
+				}
+				break;
+			case 1 : /* wait for T1 over 1st cycle */
+				if( TX - LAST >= T1 )
+				{
+						STATE = 2;
+						LAST = TX;
+				}
+				break;
+			case 2 : /* wait for T1 over 1st cycle */
+				if( TX - LAST >= T2 )
+				{
+						STATE = 3;
+						LAST = TX;
+				}
+				break;
+			case 3 : /* wait for T2 over 2nd cycle */
+				if( TX - LAST >= T3 )
+				{
+						if (S0) STATE = 0;  /* if S0 is false, the sequence stops at STATE 3 */
+						LAST = TX;
+				}
+				break;
+			default:
+				break;
+			}
+		}
+	}
+	else
+	{
+		STATE = 0;
+		LAST = TX;
+	}
+
+	return (STATE);
+}
+
+
+
