@@ -40,7 +40,8 @@ static int I2 = 0;
 
 
 
-CLK_PRG CLK_PRG1;
+CLK_PULSE CLK_PULSE1;
+TP TP1;
 
 
 
@@ -77,8 +78,9 @@ extern "C" void app_main(void)
     gpio_set_level(GPIO_Q4, 0); //set to 0 at Reset.
 
 
-    CLK_PRG1.PT = 1000;  //1 Impulse all 1000 ms.
-
+    CLK_PULSE1.PT = 500;   	//Impulse all 500 ms.
+    CLK_PULSE1.N  = 5;
+    TP1.PT = 200;	 		//100ms Impulsdauer
 
     while (true) {
     	I1 = !gpio_get_level(BUTTON_I1);
@@ -88,10 +90,13 @@ extern "C" void app_main(void)
 
 
 
+    	CLK_PULSE1.RST = I1;
 
-    	if (CLK_PRG1())
-    	    ESP_LOGI(TAG, "SIGNAL !");
 
+
+    	CLK_PULSE1();
+    	// CLK_PULSE makes 1 Cycle ON,  TP Extends this Pulse.
+        gpio_set_level(GPIO_Q1, TP1(CLK_PULSE1.Q));
 
 
         vTaskDelay(100 / portTICK_PERIOD_MS);

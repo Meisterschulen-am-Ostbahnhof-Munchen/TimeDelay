@@ -13,6 +13,12 @@
 #include "StandardLib.h"
 #include "BasicLib.h"
 
+
+#define LOG_LOCAL_LEVEL ESP_LOG_DEBUG
+#include "esp_log.h"
+
+static const char *TAG = "BasicLib";
+
 bool CLICK_DEC::operator ()(bool IN)
 {
 	/* Q shall only be active for one cycle only */
@@ -103,5 +109,28 @@ bool CLK_PRG::operator ()(void) {
 	/* generate output pulse when next_pulse is reached */
 	Q = TX - LAST >= PT;
 	if (Q) LAST = TX;
+	return (Q);
+}
+
+bool CLK_PULSE::operator ()(void) {
+	TX = T_PLC_MS();		/* read system */
+	Q = false;				/* reset Q we generate pulses only for one cycle */
+	RUN = CNT < N;
+
+	if( !INIT || RST)
+	{
+		ESP_LOGD(TAG, "CLK_PULSE: INIT %i, RST %i", INIT, RST);
+		INIT = true;
+		CNT = 0;
+		TN = TX - PT;
+		RUN = false;
+	}
+	else if ((CNT < N || N == 0) && TX - TN >= PT) 		/* generate a pulse */
+	{
+		CNT++;
+		Q = true;
+		TN += PT;
+	}
+	ESP_LOGD(TAG, "CLK_PULSE: CNT = %i", CNT);
 	return (Q);
 }

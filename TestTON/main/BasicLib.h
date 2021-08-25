@@ -116,15 +116,43 @@ public:
 	//call
 	bool operator()(void);
 private:
-	bool INIT;
-	int32_t LAST;
-	int32_t TX;
+	bool INIT = false;;
+	int32_t LAST = 0;
+	int32_t TX = 0;
 };
 
 
 
-
-
+/**
+ *
+ *
+clk_pulse uses the internal sps time to generate a clock with programmable period time.
+the period time is defined for 10ms .. 65s.
+pulse generation is continuous if N = 0 and for n pulses otherwise.
+the first cycle after start is a clk pulse and then depending on the programmed period time a delay.
+every pulse is only valid for one cycle so that a edge trigger is not necessary
+clk_prg depending on the accuracy of the system clock.
+ *
+ *
+ */
+class CLK_PULSE
+{
+public:
+	//VAR_INPUT
+	int32_t PT = 10;			/* TIME */
+	int32_t N = 0;
+	bool RST = false;
+	//VAR_OUTPUT
+	bool Q = false;			    /* Tick */
+	int32_t CNT = 0;
+	bool RUN = false;
+	//call
+	bool operator()(void);
+private:
+	bool INIT = false;
+	int32_t TX = 0;
+	int32_t TN = 0;
+};
 
 
 
