@@ -22,6 +22,7 @@
 #include "UtilLib.h"
 #include "ExtraLib.h"
 #include "BasicLib.h"
+#include "Automation.h"
 
 #define LOG_LOCAL_LEVEL ESP_LOG_INFO
 #include "esp_log.h"
@@ -43,8 +44,8 @@ static int I3 = 0;
 
 
 
-CYCLE_4 CYCLE_4A;
-DIVIDE DIVIDE1;
+INTERLOCK INTERLOCK1;
+
 
 /* Inside .cpp file, app_main function must be declared with C linkage */
 extern "C" void app_main(void)
@@ -89,8 +90,13 @@ extern "C" void app_main(void)
 
 
 
-    	gpio_set_level(GPIO_Q1, I1);
-        gpio_set_level(GPIO_Q2, I2);
+    	INTERLOCK1.I1 = I1;
+    	INTERLOCK1.I2 = I2;
+    	INTERLOCK1();
+
+
+    	gpio_set_level(GPIO_Q1, INTERLOCK1.Q1);
+        gpio_set_level(GPIO_Q2, INTERLOCK1.Q2);
         gpio_set_level(GPIO_Q3, I3);
         gpio_set_level(GPIO_Q4, 0);
 
