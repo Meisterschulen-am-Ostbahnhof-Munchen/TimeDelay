@@ -45,7 +45,7 @@ static int I3 = 0;
 
 
 THREE_POSITION_SWITCH SWITCH;
-THREE_POSITION_SWITCH_v1 old_State = Off;		/* output 1 */
+THREE_POSITION_VALVE  VALVE;
 
 /* Inside .cpp file, app_main function must be declared with C linkage */
 extern "C" void app_main(void)
@@ -93,52 +93,19 @@ extern "C" void app_main(void)
     	SWITCH.I1 = I1;
     	SWITCH.I2 = I2;
     	SWITCH();
-
-
-
-    	if (SWITCH.State == old_State)
-    	{
-    		//NOOP
-    	}
-    	else
-    	{
-        	switch(SWITCH.State)
-        	{
-        	case Off:
-        	    ESP_LOGI(TAG, "%i = Off", (int)SWITCH.State);
-    			break;
-    		case Momentary_backward_down_left:
-        	    ESP_LOGI(TAG, "%i = Momentary	=	backward,	down	or	left", (int)SWITCH.State);
-    			break;
-    		case Momentary_forward_up_right:
-        	    ESP_LOGI(TAG, "%i = Momentary	=	forward,	up	or	right", (int)SWITCH.State);
-    			break;
-    		case held_forward_up_right:
-        	    ESP_LOGI(TAG, "%i = held	forward,	up,	or	right", (int)SWITCH.State);
-    			break;
-    		case held_backward_down_left:
-        	    ESP_LOGI(TAG, "%i = held	backward,	down,	or	left", (int)SWITCH.State);
-    			break;
-    		default:
-        	    ESP_LOGI(TAG, "%i = ERROR", (int)SWITCH.State);
-    			break;
-    		}
-        	ESP_LOGI(TAG, "was %i is now %i ", (int)old_State, (int)SWITCH.State);
-    	}
+    	VALVE.State = SWITCH.State;
+    	VALVE();
 
 
 
 
-
-    	old_State = SWITCH.State;
-
-    	gpio_set_level(GPIO_Q1, I1);
-        gpio_set_level(GPIO_Q2, I2);
+    	gpio_set_level(GPIO_Q1, VALVE.Q1);
+        gpio_set_level(GPIO_Q2, VALVE.Q2);
         gpio_set_level(GPIO_Q3, I3);
         gpio_set_level(GPIO_Q4, 0);
 
 
-        vTaskDelay(2000 / portTICK_PERIOD_MS); // 2s cycle for Test.
+        vTaskDelay(100 / portTICK_PERIOD_MS); // 100ms cycle for Test.
 
     }
 }
