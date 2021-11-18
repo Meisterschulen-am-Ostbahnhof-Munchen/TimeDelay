@@ -89,7 +89,7 @@ extern "C" void app_main(void)
     	I3 = !gpio_get_level(BUTTON_I3);
 
 
-
+    	INTERLOCK1.TL = 3000;
     	INTERLOCK1.I1 = I1;
     	INTERLOCK1.I2 = I2;
     	INTERLOCK1();
