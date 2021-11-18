@@ -44,8 +44,8 @@ static int I3 = 0;
 
 
 
-INTERLOCK INTERLOCK1;
-
+THREE_POSITION_SWITCH SWITCH;
+THREE_POSITION_SWITCH_v1 old_State = Off;		/* output 1 */
 
 /* Inside .cpp file, app_main function must be declared with C linkage */
 extern "C" void app_main(void)
@@ -89,19 +89,57 @@ extern "C" void app_main(void)
     	I3 = !gpio_get_level(BUTTON_I3);
 
 
-    	INTERLOCK1.TL = 3000;
-    	INTERLOCK1.I1 = I1;
-    	INTERLOCK1.I2 = I2;
-    	INTERLOCK1();
+
+    	SWITCH.I1 = I1;
+    	SWITCH.I2 = I2;
+    	SWITCH();
 
 
-    	gpio_set_level(GPIO_Q1, INTERLOCK1.Q1);
-        gpio_set_level(GPIO_Q2, INTERLOCK1.Q2);
+
+    	if (SWITCH.State == old_State)
+    	{
+    		//NOOP
+    	}
+    	else
+    	{
+        	switch(SWITCH.State)
+        	{
+        	case Off:
+        	    ESP_LOGI(TAG, "%i = Off", (int)SWITCH.State);
+    			break;
+    		case Momentary_backward_down_left:
+        	    ESP_LOGI(TAG, "%i = Momentary	=	backward,	down	or	left", (int)SWITCH.State);
+    			break;
+    		case Momentary_forward_up_right:
+        	    ESP_LOGI(TAG, "%i = Momentary	=	forward,	up	or	right", (int)SWITCH.State);
+    			break;
+    		case held_forward_up_right:
+        	    ESP_LOGI(TAG, "%i = held	forward,	up,	or	right", (int)SWITCH.State);
+    			break;
+    		case held_backward_down_left:
+        	    ESP_LOGI(TAG, "%i = held	backward,	down,	or	left", (int)SWITCH.State);
+    			break;
+    		default:
+        	    ESP_LOGI(TAG, "%i = ERROR", (int)SWITCH.State);
+    			break;
+    		}
+        	ESP_LOGI(TAG, "was %i is now %i ", (int)old_State, (int)SWITCH.State);
+    	}
+
+
+
+
+
+    	old_State = SWITCH.State;
+
+    	gpio_set_level(GPIO_Q1, I1);
+        gpio_set_level(GPIO_Q2, I2);
         gpio_set_level(GPIO_Q3, I3);
         gpio_set_level(GPIO_Q4, 0);
 
 
-        vTaskDelay(100 / portTICK_PERIOD_MS);
+        vTaskDelay(2000 / portTICK_PERIOD_MS); // 2s cycle for Test.
+
     }
 }
 
