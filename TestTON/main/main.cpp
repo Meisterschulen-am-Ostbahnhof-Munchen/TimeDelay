@@ -86,15 +86,10 @@ extern "C" void app_main(void)
 
 
 
-    	CYCLE_4A.SL = I1;
-    	CYCLE_4A();
-    	DIVIDE1(CYCLE_4A.STATE);
-        ESP_LOGI(TAG, "STATE %i ", CYCLE_4A.STATE);
-
-        gpio_set_level(GPIO_Q1, DIVIDE1.Q1);
-        gpio_set_level(GPIO_Q2, DIVIDE1.Q2);
-        gpio_set_level(GPIO_Q3, DIVIDE1.Q3);
-        gpio_set_level(GPIO_Q4, DIVIDE1.Q4);
+    	gpio_set_level(GPIO_Q1, I1);
+        gpio_set_level(GPIO_Q2, I2);
+        gpio_set_level(GPIO_Q3, false);
+        gpio_set_level(GPIO_Q4, false);
 
 
         vTaskDelay(100 / portTICK_PERIOD_MS);
