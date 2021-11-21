@@ -1,0 +1,3 @@
+[submodule "TestTON/components/PlcLib"]
+	path = TestTON/components/PlcLib
+	url = git@github.com:Meisterschulen-am-Ostbahnhof-Munchen/PlcLib.git
