@@ -22,6 +22,7 @@
 #include "UtilLib.h"
 #include "ExtraLib.h"
 #include "BasicLib.h"
+#include "Automation.h"
 
 #define LOG_LOCAL_LEVEL ESP_LOG_INFO
 #include "esp_log.h"
@@ -29,10 +30,11 @@
 static const char *TAG = "impulse_switch";
 static int I1 = 0;
 static int I2 = 0;
+static int I3 = 0;
 
-
-#define BUTTON_I1 GPIO_NUM_32		// Pin 32.
-#define BUTTON_I2 GPIO_NUM_39		// Pin 39.
+#define BUTTON_I1 GPIO_NUM_26		// Pin 26.
+#define BUTTON_I2 GPIO_NUM_32		// Pin 32.
+#define BUTTON_I3 GPIO_NUM_39		// Pin 39.
 #define GPIO_Q1 GPIO_NUM_19
 #define GPIO_Q2 GPIO_NUM_23
 #define GPIO_Q3 GPIO_NUM_33
@@ -42,8 +44,8 @@ static int I2 = 0;
 
 
 
-CYCLE_4 CYCLE_4A;
-DIVIDE DIVIDE1;
+THREE_POSITION_SWITCH SWITCH;
+THREE_POSITION_VALVE  VALVE;
 
 /* Inside .cpp file, app_main function must be declared with C linkage */
 extern "C" void app_main(void)
@@ -65,6 +67,7 @@ extern "C" void app_main(void)
     gpio_reset_pin(GPIO_Q4);
     gpio_reset_pin(BUTTON_I1);
     gpio_reset_pin(BUTTON_I2);
+    gpio_reset_pin(BUTTON_I3);
     /* Set the GPIO as a push/pull output */
     gpio_set_direction(GPIO_Q1, GPIO_MODE_OUTPUT);
     gpio_set_direction(GPIO_Q2, GPIO_MODE_OUTPUT);
@@ -72,6 +75,7 @@ extern "C" void app_main(void)
     gpio_set_direction(GPIO_Q4, GPIO_MODE_OUTPUT);
     gpio_set_direction(BUTTON_I1, GPIO_MODE_INPUT);
     gpio_set_direction(BUTTON_I2, GPIO_MODE_INPUT);
+    gpio_set_direction(BUTTON_I3, GPIO_MODE_INPUT);
     gpio_set_level(GPIO_Q1, 0); //set to 0 at Reset.
     gpio_set_level(GPIO_Q2, 0); //set to 0 at Reset.
     gpio_set_level(GPIO_Q3, 0); //set to 0 at Reset.
@@ -82,22 +86,27 @@ extern "C" void app_main(void)
     while (true) {
     	I1 = !gpio_get_level(BUTTON_I1);
     	I2 = !gpio_get_level(BUTTON_I2);
+    	I3 = !gpio_get_level(BUTTON_I3);
+
+
+
+    	SWITCH.I1 = I1;
+    	SWITCH.I2 = I2;
+    	SWITCH();
+    	VALVE.State = SWITCH.State;
+    	VALVE();
 
 
 
 
-    	CYCLE_4A.SL = I1;
-    	CYCLE_4A();
-    	DIVIDE1(CYCLE_4A.STATE);
-        ESP_LOGI(TAG, "STATE %i ", CYCLE_4A.STATE);
-
-        gpio_set_level(GPIO_Q1, DIVIDE1.Q1);
-        gpio_set_level(GPIO_Q2, DIVIDE1.Q2);
-        gpio_set_level(GPIO_Q3, DIVIDE1.Q3);
-        gpio_set_level(GPIO_Q4, DIVIDE1.Q4);
+    	gpio_set_level(GPIO_Q1, VALVE.Q1);
+        gpio_set_level(GPIO_Q2, VALVE.Q2);
+        gpio_set_level(GPIO_Q3, I3);
+        gpio_set_level(GPIO_Q4, 0);
 
 
-        vTaskDelay(100 / portTICK_PERIOD_MS);
+        vTaskDelay(100 / portTICK_PERIOD_MS); // 100ms cycle for Test.
+
     }
 }
 
