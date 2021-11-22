@@ -44,8 +44,8 @@ static int I3 = 0;
 
 
 
-THREE_POSITION_SWITCH SWITCH;
-THREE_POSITION_VALVE  VALVE;
+FOUR_POSITION_SWITCH SWITCH;
+VALVE_WITH_FLOAT  VALVE;
 
 /* Inside .cpp file, app_main function must be declared with C linkage */
 extern "C" void app_main(void)
@@ -92,6 +92,7 @@ extern "C" void app_main(void)
 
     	SWITCH.I1 = I1;
     	SWITCH.I2 = I2;
+    	SWITCH.I3 = I3;
     	SWITCH();
     	VALVE.State = SWITCH.State;
     	VALVE();
@@ -101,8 +102,8 @@ extern "C" void app_main(void)
 
     	gpio_set_level(GPIO_Q1, VALVE.Q1);
         gpio_set_level(GPIO_Q2, VALVE.Q2);
-        gpio_set_level(GPIO_Q3, I3);
-        gpio_set_level(GPIO_Q4, 0);
+        gpio_set_level(GPIO_Q3, VALVE.Q3);
+        gpio_set_level(GPIO_Q4, VALVE.Q4);
 
 
         vTaskDelay(100 / portTICK_PERIOD_MS); // 100ms cycle for Test.
