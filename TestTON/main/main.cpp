@@ -43,7 +43,7 @@ static int I3 = 0;
 
 
 
-TOF TOF1;
+TOF_R_TRIG TOF1;
 
 /* Inside .cpp file, app_main function must be declared with C linkage */
 extern "C" void app_main(void)
