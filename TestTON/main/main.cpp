@@ -43,9 +43,7 @@ static int I3 = 0;
 
 
 
-
-FOUR_POSITION_SWITCH SWITCH;
-VALVE_WITH_FLOAT  VALVE;
+TOF TOF1;
 
 /* Inside .cpp file, app_main function must be declared with C linkage */
 extern "C" void app_main(void)
@@ -83,6 +81,9 @@ extern "C" void app_main(void)
 
 
 
+
+    TOF1.PT = 1000;
+
     while (true) {
     	I1 = !gpio_get_level(BUTTON_I1);
     	I2 = !gpio_get_level(BUTTON_I2);
@@ -90,24 +91,20 @@ extern "C" void app_main(void)
 
 
 
-    	SWITCH.I1 = I1;
-    	SWITCH.I2 = I2;
-    	SWITCH.I3 = I3;
-    	SWITCH();
-    	VALVE.State = SWITCH.State;
-    	VALVE();
+    	// TEST TOF
+    	TOF1(I1);
+        gpio_set_level(GPIO_Q1, TOF1.Q);
 
 
 
 
-    	gpio_set_level(GPIO_Q1, VALVE.Q1);
-        gpio_set_level(GPIO_Q2, VALVE.Q2);
-        gpio_set_level(GPIO_Q3, VALVE.Q3);
-        gpio_set_level(GPIO_Q4, VALVE.Q4);
 
 
-        vTaskDelay(100 / portTICK_PERIOD_MS); // 100ms cycle for Test.
 
+
+
+
+        vTaskDelay(100 / portTICK_PERIOD_MS);
     }
 }
 
