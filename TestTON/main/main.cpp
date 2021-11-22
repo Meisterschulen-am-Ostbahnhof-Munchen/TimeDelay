@@ -26,6 +26,7 @@
 #include "ExtraLib.h"
 #include "BasicLib.h"
 #include "Automation.h"
+#include "AutomationTimer.h"
 
 #define LOG_LOCAL_LEVEL ESP_LOG_INFO
 #include "esp_log.h"
@@ -89,9 +90,13 @@ extern "C" void app_main(void)
 
 
 
-    TimerSettings*   timerSettings        = new TimerSettings;
-	TOF_R_TRIG_O TOF1(timerSettings, TIMER_1);
-	TOF_R_TRIG_O TOF2(timerSettings, TIMER_2);
+
+
+
+	THREE_POSITION_SWITCH SWITCH;
+	THREE_POSITION_TOF    TIMER;
+	THREE_POSITION_VALVE  VALVE;
+
 
     while (true) {
     	I1 = !gpio_get_level(BUTTON_I1);
@@ -99,23 +104,25 @@ extern "C" void app_main(void)
     	I3 = !gpio_get_level(BUTTON_I3);
 
 
-    	if (I3)
-    	{
-			timerSettings->setPT(TIMER_1, 5000);
-			timerSettings->setPT(TIMER_2, 5000);
-    	}
+
+    	SWITCH.I1 = I1;
+    	SWITCH.I2 = I2;
+    	SWITCH();
+    	TIMER.IN = SWITCH.State;
+    	TIMER();
+    	VALVE.State = TIMER.OUT;
+    	VALVE();
 
 
 
-    	// TEST TOF
-    	TOF1(I1);
-    	TOF2(I2);
-        gpio_set_level(GPIO_Q1, TOF1.Q);
-        gpio_set_level(GPIO_Q2, TOF2.Q);
-        vTaskDelay(100 / portTICK_PERIOD_MS);
+
+    	gpio_set_level(GPIO_Q1, VALVE.Q1);
+        gpio_set_level(GPIO_Q2, VALVE.Q2);
+        gpio_set_level(GPIO_Q3, I3);
+        gpio_set_level(GPIO_Q4, 0);
 
 
-
+        vTaskDelay(100 / portTICK_PERIOD_MS); // 100ms cycle for Test.
 
     }
 }
