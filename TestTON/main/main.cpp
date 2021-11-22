@@ -96,7 +96,7 @@ extern "C" void app_main(void)
 	THREE_POSITION_SWITCH SWITCH;
 	THREE_POSITION_TOF    TIMER;
 	THREE_POSITION_VALVE  VALVE;
-	TIMER.PT = 1000;
+	TIMER.PT = 8000;
 
 
     while (true) {
