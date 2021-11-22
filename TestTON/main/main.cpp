@@ -30,6 +30,10 @@
 #define LOG_LOCAL_LEVEL ESP_LOG_INFO
 #include "esp_log.h"
 
+
+const char *TIMER_2 = "timer_2";
+const char *TIMER_1 = "timer_1";
+
 static const char *TAG = "impulse_switch";
 static int I1 = 0;
 static int I2 = 0;
@@ -86,8 +90,8 @@ extern "C" void app_main(void)
 
 
     TimerSettings*   timerSettings        = new TimerSettings;
-    TOF_R_TRIG_O TOF1(timerSettings);
-    TOF_R_TRIG_O TOF2(timerSettings);
+	TOF_R_TRIG_O TOF1(timerSettings, TIMER_1);
+	TOF_R_TRIG_O TOF2(timerSettings, TIMER_2);
 
     while (true) {
     	I1 = !gpio_get_level(BUTTON_I1);
@@ -96,7 +100,10 @@ extern "C" void app_main(void)
 
 
     	if (I3)
-    		timerSettings->setPT(5000);
+    	{
+			timerSettings->setPT(TIMER_1, 5000);
+			timerSettings->setPT(TIMER_2, 5000);
+    	}
 
 
 
