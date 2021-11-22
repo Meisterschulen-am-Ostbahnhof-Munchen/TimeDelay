@@ -9,6 +9,7 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdint.h>
 
 
 #include "freertos/FreeRTOS.h"
@@ -19,6 +20,7 @@
 #include "esp_system.h"
 #include "TimeLib.h"
 #include "StandardLib.h"
+#include "TimerSettings.h"
 #include "StandardLibObserved.h"
 #include "UtilLib.h"
 #include "ExtraLib.h"
@@ -44,7 +46,7 @@ static int I3 = 0;
 
 
 
-TOF_R_TRIG_O TOF1;
+
 
 /* Inside .cpp file, app_main function must be declared with C linkage */
 extern "C" void app_main(void)
@@ -83,7 +85,9 @@ extern "C" void app_main(void)
 
 
 
-    TOF1.PT = 1000;
+    TimerSettings*   timerSettings        = new TimerSettings;
+    TOF_R_TRIG_O TOF1(timerSettings);
+
 
     while (true) {
     	I1 = !gpio_get_level(BUTTON_I1);
