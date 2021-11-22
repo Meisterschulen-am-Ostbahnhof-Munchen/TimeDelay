@@ -87,7 +87,7 @@ extern "C" void app_main(void)
 
     TimerSettings*   timerSettings        = new TimerSettings;
     TOF_R_TRIG_O TOF1(timerSettings);
-
+    TOF_R_TRIG_O TOF2(timerSettings);
 
     while (true) {
     	I1 = !gpio_get_level(BUTTON_I1);
@@ -95,21 +95,21 @@ extern "C" void app_main(void)
     	I3 = !gpio_get_level(BUTTON_I3);
 
 
+    	if (I3)
+    		timerSettings->setPT(5000);
+
+
 
     	// TEST TOF
     	TOF1(I1);
+    	TOF2(I2);
         gpio_set_level(GPIO_Q1, TOF1.Q);
-
-
-
-
-
-
-
-
-
-
+        gpio_set_level(GPIO_Q2, TOF2.Q);
         vTaskDelay(100 / portTICK_PERIOD_MS);
+
+
+
+
     }
 }
 
