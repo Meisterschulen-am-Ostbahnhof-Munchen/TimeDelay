@@ -19,6 +19,7 @@
 #include "esp_system.h"
 #include "TimeLib.h"
 #include "StandardLib.h"
+#include "StandardLibObserved.h"
 #include "UtilLib.h"
 #include "ExtraLib.h"
 #include "BasicLib.h"
@@ -43,7 +44,7 @@ static int I3 = 0;
 
 
 
-TOF_R_TRIG TOF1;
+TOF_R_TRIG_O TOF1;
 
 /* Inside .cpp file, app_main function must be declared with C linkage */
 extern "C" void app_main(void)
