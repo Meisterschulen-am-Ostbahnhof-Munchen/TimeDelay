@@ -42,11 +42,6 @@ static int I3 = 0;
 
 
 
-
-
-THREE_POSITION_SWITCH SWITCH;
-THREE_POSITION_VALVE  VALVE;
-
 /* Inside .cpp file, app_main function must be declared with C linkage */
 extern "C" void app_main(void)
 {
@@ -83,26 +78,37 @@ extern "C" void app_main(void)
 
 
 
-    while (true) {
+
+
+    TON TON1;
+    TON TON2;
+    TON TON3;
+    TON TON4;
+
+    TON1.PT = 1000;
+    TON2.PT = 2000;
+    TON3.PT = 3000;
+    TON4.PT = 4000;
+
+
+    while (true) // Endlos-Schleife
+    {
     	I1 = !gpio_get_level(BUTTON_I1);
     	I2 = !gpio_get_level(BUTTON_I2);
     	I3 = !gpio_get_level(BUTTON_I3);
 
 
 
-    	SWITCH.I1 = I1;
-    	SWITCH.I2 = I2;
-    	SWITCH();
-    	VALVE.State = SWITCH.State;
-    	VALVE();
+    	TON1(I1);
+    	TON2(I2);
+    	TON3(I3);
+    	TON4(I1 && I2);
 
 
-
-
-    	gpio_set_level(GPIO_Q1, VALVE.Q1);
-        gpio_set_level(GPIO_Q2, VALVE.Q2);
-        gpio_set_level(GPIO_Q3, I3);
-        gpio_set_level(GPIO_Q4, 0);
+    	gpio_set_level(GPIO_Q1, TON1.Q);
+        gpio_set_level(GPIO_Q2, TON2.Q);
+        gpio_set_level(GPIO_Q3, TON3.Q);
+        gpio_set_level(GPIO_Q4, TON4.Q);
 
 
         vTaskDelay(100 / portTICK_PERIOD_MS); // 100ms cycle for Test.
