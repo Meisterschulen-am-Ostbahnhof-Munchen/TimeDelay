@@ -1,7 +1,9 @@
 
 
 
-
+if(CONFIG_EXAMPLE_TON)
+	set(COMPONENT_SRCS  "examples/EXAMPLE_TON/main.cpp")
+endif()
 
 
 if(CONFIG_4_TON_SUPERTEST)
