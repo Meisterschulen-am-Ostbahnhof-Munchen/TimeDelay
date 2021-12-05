@@ -1,4 +1,4 @@
-/* 4_TON_SUPERTEST/main.cpp - Application main entry point */
+/* FOUR_POSITION_3TOF/main.cpp - Application main entry point */
 
 /*
  * Copyright (c) 2017 Intel Corporation
@@ -11,21 +11,28 @@
 #include "freertos/task.h"
 #include "driver/gpio.h"
 #include "sdkconfig.h"
-#include "StandardLib.h"
+#include "Automation_FOUR_POSITION.h"
+#include "AutomationTimer_FOUR_POSITION_3TOF.h"
 
 #define LOG_LOCAL_LEVEL ESP_LOG_INFO
 #include "esp_log.h"
 
-static const char * const TAG = "impulse_switch";
 
+static const char * const TAG = "FOUR_POSITION_3TOF";
+static int I1 = 0;
+static int I2 = 0;
+static int I3 = 0;
 
 #define BUTTON_I1 GPIO_NUM_26        // Pin 26.
 #define BUTTON_I2 GPIO_NUM_32        // Pin 32.
 #define BUTTON_I3 GPIO_NUM_39        // Pin 39.
-#define GPIO_Q1 GPIO_NUM_19          // Pin 19.
+#define GPIO_Q1 GPIO_NUM_19
 #define GPIO_Q2 GPIO_NUM_23
 #define GPIO_Q3 GPIO_NUM_33
 #define GPIO_Q4 GPIO_NUM_25
+
+
+
 
 
 
@@ -34,7 +41,8 @@ extern "C" void app_main(void)
 {
 
 
-    ESP_LOGI(TAG, "Initializing 4_TON_SUPERTEST...");
+
+    ESP_LOGI(TAG, "Initializing...");
 
     /* Configure the IOMUX register for pad BLINK_GPIO (some pads are
        muxed to GPIO on reset already, but some default to other
@@ -66,44 +74,43 @@ extern "C" void app_main(void)
 
 
 
-    TON TON1;
-    TON TON2;
-    TON TON3;
-    TON TON4;
-
-    TON1.PT = 1000;
-    TON2.PT = 2000;
-    TON3.PT = 3000;
-    TON4.PT = 4000;
 
 
-    while (true) // Endlos-Schleife
-    {
-
-        // Eingang lesen, das not wird gebraucht weil die Eingaenge bei losgelassenem Taster auf 3.3V sind, und der Taster auf GND schaltet.
-        bool I1 = not gpio_get_level(BUTTON_I1);
-        bool I2 = not gpio_get_level(BUTTON_I2);
-        bool I3 = not gpio_get_level(BUTTON_I3);
-
-
-        // den I1 an TON1 uebergeben, und TON1 aufrufen
-        TON1(I1);
-        // den I2 an TON2 uebergeben, und TON2 aufrufen
-        TON2(I2);
-        // den I3 an TON3 uebergeben, und TON3 aufrufen
-        TON3(I3);
-        // den Ausdruck I1 UND I2 an TON3 uebergeben, und TON3 aufrufen
-        TON4(I1 and I2);
+    FOUR_POSITION_SWITCH SWITCH;
+    FOUR_POSITION_3TOF    TIMER;
+    VALVE_WITH_FLOAT     VALVE;
+    TIMER.PT_up = 3000;
+    TIMER.PT_down = 500;
+    TIMER.PT_float = 8000;
 
 
-        // Ausgaenge setzen
-        gpio_set_level(GPIO_Q1, TON1.Q);
-        gpio_set_level(GPIO_Q2, TON2.Q);
-        gpio_set_level(GPIO_Q3, TON3.Q);
-        gpio_set_level(GPIO_Q4, TON4.Q);
+    while (true) {
+        I1 = not gpio_get_level(BUTTON_I1);
+        I2 = not gpio_get_level(BUTTON_I2);
+        I3 = not gpio_get_level(BUTTON_I3);
 
-        // 100ms warten  = Intervallzeit des Tasks
+
+
+        SWITCH.I1 = I1;
+        SWITCH.I2 = I2;
+        SWITCH.I3 = I3;
+        SWITCH();
+        TIMER.IN = SWITCH.State;
+        TIMER();
+        VALVE.State = TIMER.OUT;
+        VALVE();
+
+
+
+
+        gpio_set_level(GPIO_Q1, VALVE.Q1);
+        gpio_set_level(GPIO_Q2, VALVE.Q2);
+        gpio_set_level(GPIO_Q3, VALVE.Q3);
+        gpio_set_level(GPIO_Q4, VALVE.Q4);
+
+
         vTaskDelay(100 / portTICK_PERIOD_MS); // 100ms cycle for Test.
+
     }
 }
 

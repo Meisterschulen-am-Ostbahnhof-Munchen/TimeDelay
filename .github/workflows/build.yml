@@ -56,7 +56,7 @@ jobs:
         ./esp-idf/install.sh
         . ./esp-idf/export.sh
         echo $PATH
-        cd $PROJECT_PATH/TestTON
+        cd $PROJECT_PATH/TestTimeDelay
         build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} idf.py build
     - name: Run sonar-scanner
       env:
@@ -68,5 +68,5 @@ jobs:
     - uses: actions/upload-artifact@v2
       with:
         name: esp32_build
-        path: TestTON/build
+        path: TestTimeDelay/build
 
