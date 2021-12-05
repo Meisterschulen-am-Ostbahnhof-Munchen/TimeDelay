@@ -12,6 +12,9 @@ menu "### TestTON Example Configuration ###"
 
         config EXAMPLE_TOF
             bool "EXAMPLE_TOF"
+            
+        config 4_TON_SUPERTEST
+        	bool "4 TON Supertest !"
 
         config FOUR_POSITION_TOF
             bool "FOUR_POSITION_TOF"
