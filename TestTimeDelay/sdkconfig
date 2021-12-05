@@ -128,10 +128,24 @@ CONFIG_PARTITION_TABLE_MD5=y
 #
 # ### TestTON Example Configuration ###
 #
+# CONFIG_EXAMPLE_AND is not set
+# CONFIG_EXAMPLE_C_AND is not set
+# CONFIG_EXAMPLE_OR is not set
+# CONFIG_EXAMPLE_XOR is not set
+# CONFIG_EXAMPLE_NOT is not set
 # CONFIG_EXAMPLE_TON is not set
 # CONFIG_EXAMPLE_TOF is not set
-CONFIG_4_TON_SUPERTEST=y
+# CONFIG_EXAMPLE_TRIG is not set
+# CONFIG_EXAMPLE_BLINK is not set
+# CONFIG_4_TON_SUPERTEST is not set
+CONFIG_THREE_POSITION_TOF=y
+# CONFIG_THREE_POSITION_TOF_Observed is not set
+# CONFIG_THREE_POSITION_2TOF is not set
+# CONFIG_THREE_POSITION_2TOF_Observed is not set
 # CONFIG_FOUR_POSITION_TOF is not set
+# CONFIG_FOUR_POSITION_TOF_Observed is not set
+# CONFIG_FOUR_POSITION_3TOF is not set
+# CONFIG_FOUR_POSITION_3TOF_Observed is not set
 # end of ### TestTON Example Configuration ###
 
 #
