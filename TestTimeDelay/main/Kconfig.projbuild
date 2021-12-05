@@ -37,9 +37,29 @@ menu "### TestTON Example Configuration ###"
         config 4_TON_SUPERTEST
         	bool "4 TON Supertest !"
 
+        config THREE_POSITION_TOF
+            bool "THREE_POSITION_TOF"
+            
+        config THREE_POSITION_TOF_Observed
+            bool "THREE_POSITION_TOF_Observed"
+            
+        config THREE_POSITION_2TOF
+            bool "THREE_POSITION_2TOF"
+            
+        config THREE_POSITION_2TOF_Observed
+            bool "THREE_POSITION_2TOF_Observed"    
+            
         config FOUR_POSITION_TOF
             bool "FOUR_POSITION_TOF"
-
+            
+        config FOUR_POSITION_TOF_Observed
+            bool "FOUR_POSITION_TOF_Observed"
+                            
+        config FOUR_POSITION_3TOF
+            bool "FOUR_POSITION_3TOF"
+            
+        config FOUR_POSITION_3TOF_Observed
+            bool "FOUR_POSITION_3TOF_Observed"
                 
                 
     endchoice # EXAMPLE_ETHERNET_TYPE

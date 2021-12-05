@@ -64,7 +64,7 @@ extern "C" void app_main(void)
 
         // Ausgaenge setzen
         gpio_set_level(GPIO_Q1,  BLINK1.OUT);
-        gpio_set_level(GPIO_Q2, !BLINK1.OUT);
+        gpio_set_level(GPIO_Q2, not BLINK1.OUT);
 
         // 100ms warten = Intervallzeit des Tasks
         vTaskDelay(100 / portTICK_PERIOD_MS); // 100ms cycle for Test.
