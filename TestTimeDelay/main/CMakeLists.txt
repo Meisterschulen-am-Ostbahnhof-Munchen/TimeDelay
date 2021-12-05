@@ -11,6 +11,14 @@ if(CONFIG_EXAMPLE_OR)
     set(COMPONENT_SRCS  "examples/EXAMPLE_OR/main.cpp")
 endif()
 
+if(CONFIG_EXAMPLE_XOR)
+    set(COMPONENT_SRCS  "examples/EXAMPLE_XOR/main.cpp")
+endif()
+
+if(CONFIG_EXAMPLE_NOT)
+    set(COMPONENT_SRCS  "examples/EXAMPLE_NOT/main.cpp")
+endif()
+
 if(CONFIG_EXAMPLE_TON)
 	set(COMPONENT_SRCS  "examples/EXAMPLE_TON/main.cpp")
 endif()

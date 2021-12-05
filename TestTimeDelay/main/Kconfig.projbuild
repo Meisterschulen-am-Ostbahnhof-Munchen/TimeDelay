@@ -16,7 +16,12 @@ menu "### TestTON Example Configuration ###"
         config EXAMPLE_OR
             bool "EXAMPLE_OR"
             
-            
+        config EXAMPLE_XOR
+            bool "EXAMPLE_XOR"  
+             
+         config EXAMPLE_NOT
+            bool "EXAMPLE_NOT"  
+                       
         config EXAMPLE_TON
             bool "EXAMPLE_TON"
 
