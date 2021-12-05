@@ -61,7 +61,7 @@ extern "C" void app_main(void)
 
 
         // Ausgaenge setzen
-        gpio_set_level(GPIO_Q1, I1 && I2); //Verwendung des C-UND "&&"
+        gpio_set_level(GPIO_Q1, I1 and I2); //Verwendung des AND aus der IEC IEC 61131; auch in C++ vorhanden, in C nicht !
 
         // 100ms warten  = Intervallzeit des Tasks
         vTaskDelay(100 / portTICK_PERIOD_MS); // 100ms cycle for Test.

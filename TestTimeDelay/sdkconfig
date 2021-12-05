@@ -128,8 +128,8 @@ CONFIG_PARTITION_TABLE_MD5=y
 #
 # ### TestTON Example Configuration ###
 #
-# CONFIG_EXAMPLE_AND is not set
-CONFIG_EXAMPLE_C_AND=y
+CONFIG_EXAMPLE_AND=y
+# CONFIG_EXAMPLE_C_AND is not set
 # CONFIG_EXAMPLE_TON is not set
 # CONFIG_EXAMPLE_TOF is not set
 # CONFIG_EXAMPLE_TRIG is not set
