@@ -7,6 +7,12 @@ menu "### TestTON Example Configuration ###"
         help
             Select which Example to use.
 
+        config EXAMPLE_AND
+            bool "EXAMPLE_AND"
+            
+        config EXAMPLE_C_AND
+            bool "EXAMPLE_C_AND"
+            
         config EXAMPLE_TON
             bool "EXAMPLE_TON"
 

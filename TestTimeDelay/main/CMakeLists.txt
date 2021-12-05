@@ -1,5 +1,11 @@
 
+if(CONFIG_EXAMPLE_AND)
+    set(COMPONENT_SRCS  "examples/EXAMPLE_AND/main.cpp")
+endif()
 
+if(CONFIG_EXAMPLE_C_AND)
+    set(COMPONENT_SRCS  "examples/EXAMPLE_C_AND/main.cpp")
+endif()
 
 if(CONFIG_EXAMPLE_TON)
 	set(COMPONENT_SRCS  "examples/EXAMPLE_TON/main.cpp")
