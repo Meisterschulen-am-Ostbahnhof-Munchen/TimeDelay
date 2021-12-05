@@ -126,6 +126,14 @@ CONFIG_PARTITION_TABLE_MD5=y
 # end of Partition Table
 
 #
+# ### TestTON Example Configuration ###
+#
+# CONFIG_EXAMPLE_TON is not set
+# CONFIG_EXAMPLE_TOF is not set
+CONFIG_FOUR_POSITION_TOF=y
+# end of ### TestTON Example Configuration ###
+
+#
 # Compiler options
 #
 CONFIG_COMPILER_OPTIMIZATION_DEFAULT=y

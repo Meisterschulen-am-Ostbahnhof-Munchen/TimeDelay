@@ -1,8 +1,14 @@
-# Edit following two lines to set component requirements (see docs)
-set(COMPONENT_REQUIRES )
-set(COMPONENT_PRIV_REQUIRES )
 
-set(COMPONENT_SRCDIRS ".")
+
+
+
+if(CONFIG_FOUR_POSITION_TOF)
+	set(COMPONENT_SRCS  "examples/FOUR_POSITION_TOF/main.cpp")
+endif()
+
+
+
+
+
 set(COMPONENT_ADD_INCLUDEDIRS "")
-
 register_component()

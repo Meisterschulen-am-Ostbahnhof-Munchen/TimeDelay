@@ -1,0 +1,23 @@
+menu "### TestTON Example Configuration ###"
+
+
+    choice EXAMPLE_TYPE
+        prompt "Example Type"
+        default EXAMPLE_TON
+        help
+            Select which Example to use.
+
+        config EXAMPLE_TON
+            bool "EXAMPLE_TON"
+
+        config EXAMPLE_TOF
+            bool "EXAMPLE_TOF"
+
+        config FOUR_POSITION_TOF
+            bool "FOUR_POSITION_TOF"
+
+                
+                
+    endchoice # EXAMPLE_ETHERNET_TYPE
+
+endmenu
