@@ -1,4 +1,4 @@
-/* EXAMPLE_AND/main.cpp - Application main entry point */
+/* EXAMPLE_OR/main.cpp - Application main entry point */
 
 /*
  * Copyright (c) 2017 Intel Corporation
@@ -15,7 +15,7 @@
 #define LOG_LOCAL_LEVEL ESP_LOG_INFO
 #include "esp_log.h"
 
-static const char * const TAG = "EXAMPLE_AND";
+static const char * const TAG = "EXAMPLE_OR";
 
 
 #define BUTTON_I1 GPIO_NUM_26        // Pin 26.
@@ -31,7 +31,7 @@ extern "C" void app_main(void)
 
 	//https://www.xplore-dna.net/mod/page/view.php?id=153
 
-    ESP_LOGI(TAG, "Initializing EXAMPLE_AND ...");
+    ESP_LOGI(TAG, "Initializing EXAMPLE_OR ...");
 
     /* Configure the IOMUX register for pad BLINK_GPIO (some pads are
        muxed to GPIO on reset already, but some default to other
@@ -62,7 +62,7 @@ extern "C" void app_main(void)
 
 
         // Ausgaenge setzen
-        gpio_set_level(GPIO_Q1, I1 and I2); //Verwendung des AND aus der IEC IEC 61131; auch in C++ vorhanden, in C nicht !
+        gpio_set_level(GPIO_Q1, I1 or I2); //Verwendung des OR aus der IEC IEC 61131; auch in C++ vorhanden, in C nicht !
 
         // 100ms warten  = Intervallzeit des Tasks
         vTaskDelay(100 / portTICK_PERIOD_MS); // 100ms cycle for Test.

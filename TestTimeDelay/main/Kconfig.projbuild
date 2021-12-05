@@ -13,6 +13,10 @@ menu "### TestTON Example Configuration ###"
         config EXAMPLE_C_AND
             bool "EXAMPLE_C_AND"
             
+        config EXAMPLE_OR
+            bool "EXAMPLE_OR"
+            
+            
         config EXAMPLE_TON
             bool "EXAMPLE_TON"
 
