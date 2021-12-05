@@ -86,9 +86,9 @@ extern "C" void app_main(void)
 
 
     while (true) {
-        I1 = !gpio_get_level(BUTTON_I1);
-        I2 = !gpio_get_level(BUTTON_I2);
-        I3 = !gpio_get_level(BUTTON_I3);
+        I1 = not gpio_get_level(BUTTON_I1);
+        I2 = not gpio_get_level(BUTTON_I2);
+        I3 = not gpio_get_level(BUTTON_I3);
 
 
 
