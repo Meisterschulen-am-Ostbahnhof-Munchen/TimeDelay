@@ -27,10 +27,8 @@
 #define LOG_LOCAL_LEVEL ESP_LOG_INFO
 #include "esp_log.h"
 
-static const char *TAG = "impulse_switch";
-static int I1 = 0;
-static int I2 = 0;
-static int I3 = 0;
+static const char * const TAG = "impulse_switch";
+
 
 #define BUTTON_I1 GPIO_NUM_26		// Pin 26.
 #define BUTTON_I2 GPIO_NUM_32		// Pin 32.
@@ -41,11 +39,6 @@ static int I3 = 0;
 #define GPIO_Q4 GPIO_NUM_25
 
 
-
-
-
-THREE_POSITION_SWITCH SWITCH;
-THREE_POSITION_VALVE  VALVE;
 
 /* Inside .cpp file, app_main function must be declared with C linkage */
 extern "C" void app_main(void)
@@ -83,28 +76,45 @@ extern "C" void app_main(void)
 
 
 
-    while (true) {
-    	I1 = !gpio_get_level(BUTTON_I1);
-    	I2 = !gpio_get_level(BUTTON_I2);
-    	I3 = !gpio_get_level(BUTTON_I3);
 
 
+    TON TON1;
+    TON TON2;
+    TON TON3;
+    TON TON4;
 
-    	SWITCH.I1 = I1;
-    	SWITCH.I2 = I2;
-    	SWITCH();
-    	VALVE.State = SWITCH.State;
-    	VALVE();
-
-
-
-
-    	gpio_set_level(GPIO_Q1, VALVE.Q1);
-        gpio_set_level(GPIO_Q2, VALVE.Q2);
-        gpio_set_level(GPIO_Q3, I3);
-        gpio_set_level(GPIO_Q4, 0);
+    TON1.PT = 1000;
+    TON2.PT = 2000;
+    TON3.PT = 3000;
+    TON4.PT = 4000;
 
 
+    while (true) // Endlos-Schleife
+    {
+
+    	// Eingang lesen, das "!" bedeutet "NOT" weil die Eingaenge bei losgelassenem Taster auf 3.3V sind, und der Taster auf GND schaltet.
+    	bool I1 = !gpio_get_level(BUTTON_I1);
+    	bool I2 = !gpio_get_level(BUTTON_I2);
+    	bool I3 = !gpio_get_level(BUTTON_I3);
+
+
+    	// den I1 an TON1 uebergeben, und TON1 aufrufen
+    	TON1(I1);
+    	// den I2 an TON2 uebergeben, und TON2 aufrufen
+    	TON2(I2);
+    	// den I3 an TON3 uebergeben, und TON3 aufrufen
+    	TON3(I3);
+    	// den Ausdruck I1 UND I2 an TON3 uebergeben, und TON3 aufrufen
+    	TON4(I1 && I2);
+
+
+    	// Ausgaenge setzen
+    	gpio_set_level(GPIO_Q1, TON1.Q);
+        gpio_set_level(GPIO_Q2, TON2.Q);
+        gpio_set_level(GPIO_Q3, TON3.Q);
+        gpio_set_level(GPIO_Q4, TON4.Q);
+
+        // 100ms warten
         vTaskDelay(100 / portTICK_PERIOD_MS); // 100ms cycle for Test.
 
     }
