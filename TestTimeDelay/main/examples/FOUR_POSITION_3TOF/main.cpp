@@ -1,4 +1,4 @@
-/* FOUR_POSITION_TOF/main.cpp - Application main entry point */
+/* FOUR_POSITION_3TOF/main.cpp - Application main entry point */
 
 /*
  * Copyright (c) 2017 Intel Corporation
@@ -12,13 +12,13 @@
 #include "driver/gpio.h"
 #include "sdkconfig.h"
 #include "Automation_FOUR_POSITION.h"
-#include "AutomationTimer_FOUR_POSITION.h"
+#include "AutomationTimer_FOUR_POSITION_3TOF.h"
 
 #define LOG_LOCAL_LEVEL ESP_LOG_INFO
 #include "esp_log.h"
 
 
-static const char * const TAG = "impulse_switch";
+static const char * const TAG = "FOUR_POSITION_3TOF";
 static int I1 = 0;
 static int I2 = 0;
 static int I3 = 0;
@@ -77,9 +77,11 @@ extern "C" void app_main(void)
 
 
     FOUR_POSITION_SWITCH SWITCH;
-    FOUR_POSITION_TOF    TIMER;
+    FOUR_POSITION_3TOF    TIMER;
     VALVE_WITH_FLOAT     VALVE;
-    TIMER.PT = 3000;
+    TIMER.PT_up = 3000;
+    TIMER.PT_down = 500;
+    TIMER.PT_float = 8000;
 
 
     while (true) {
