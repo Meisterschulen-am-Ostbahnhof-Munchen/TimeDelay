@@ -19,8 +19,8 @@
 static const char * const TAG = "EXAMPLE_TON";
 
 
-#define BUTTON_I1 GPIO_NUM_26		// Pin 26.
-#define GPIO_Q1 GPIO_NUM_19		    // Pin 19.
+#define BUTTON_I1 GPIO_NUM_26        // Pin 26.
+#define GPIO_Q1 GPIO_NUM_19            // Pin 19.
 
 
 
@@ -50,14 +50,14 @@ extern "C" void app_main(void)
 
     while (true) // Endlos-Schleife
     {
-    	// Eingang lesen, das "!" bedeutet "NOT" weil die Eingaenge bei losgelassenem Taster auf 3.3V sind, und der Taster auf GND schaltet.
-    	bool I1 = !gpio_get_level(BUTTON_I1);
+        // Eingang lesen, das "!" bedeutet "NOT" weil die Eingaenge bei losgelassenem Taster auf 3.3V sind, und der Taster auf GND schaltet.
+        bool I1 = !gpio_get_level(BUTTON_I1);
 
-    	// den I1 an TON1 uebergeben, und TON1 aufrufen
-    	TON1(I1);
+        // den I1 an TON1 uebergeben, und TON1 aufrufen
+        TON1(I1);
 
-    	// Ausgaenge setzen
-    	gpio_set_level(GPIO_Q1, TON1.Q);
+        // Ausgaenge setzen
+        gpio_set_level(GPIO_Q1, TON1.Q);
 
         // 100ms warten
         vTaskDelay(100 / portTICK_PERIOD_MS); // 100ms cycle for Test.

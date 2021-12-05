@@ -129,9 +129,9 @@ CONFIG_PARTITION_TABLE_MD5=y
 # ### TestTON Example Configuration ###
 #
 # CONFIG_EXAMPLE_TON is not set
-# CONFIG_EXAMPLE_TOF is not set
+CONFIG_EXAMPLE_TOF=y
 # CONFIG_4_TON_SUPERTEST is not set
-CONFIG_FOUR_POSITION_TOF=y
+# CONFIG_FOUR_POSITION_TOF is not set
 # end of ### TestTON Example Configuration ###
 
 #
