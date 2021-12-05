@@ -12,14 +12,14 @@
 #include "driver/gpio.h"
 #include "sdkconfig.h"
 #include "Automation_FOUR_POSITION.h"
-#include "AutomationTimer_FOUR_POSITION.h"
+#include "AutomationTimer_FOUR_POSITION_TOF.h"
 
 #define LOG_LOCAL_LEVEL ESP_LOG_INFO
 #include "esp_log.h"
 
 
 
-static const char * const TAG = "impulse_switch";
+static const char * const TAG = "FOUR_POSITION_TOF";
 static int I1 = 0;
 static int I2 = 0;
 static int I3 = 0;
