@@ -93,7 +93,7 @@ extern "C" void app_main(void)
         // den I3 an TON3 uebergeben, und TON3 aufrufen
         TON3(I3);
         // den Ausdruck I1 UND I2 an TON3 uebergeben, und TON3 aufrufen
-        TON4(I1 && I2);
+        TON4(I1 and I2);
 
 
         // Ausgaenge setzen
