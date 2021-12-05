@@ -13,6 +13,9 @@ menu "### TestTON Example Configuration ###"
         config EXAMPLE_TOF
             bool "EXAMPLE_TOF"
             
+        config EXAMPLE_TRIG
+            bool "EXAMPLE_TRIG"
+            
         config EXAMPLE_BLINK
             bool "EXAMPLE_BLINK"
             

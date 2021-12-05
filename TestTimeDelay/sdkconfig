@@ -130,7 +130,8 @@ CONFIG_PARTITION_TABLE_MD5=y
 #
 # CONFIG_EXAMPLE_TON is not set
 # CONFIG_EXAMPLE_TOF is not set
-CONFIG_EXAMPLE_BLINK=y
+CONFIG_EXAMPLE_TRIG=y
+# CONFIG_EXAMPLE_BLINK is not set
 # CONFIG_4_TON_SUPERTEST is not set
 # CONFIG_FOUR_POSITION_TOF is not set
 # end of ### TestTON Example Configuration ###
