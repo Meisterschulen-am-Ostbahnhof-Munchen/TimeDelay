@@ -18,8 +18,6 @@
 #include "esp_log.h"
 
 
-const char *TIMER_2 = "timer_2";
-const char *TIMER_1 = "timer_1";
 
 static const char * const TAG = "impulse_switch";
 static int I1 = 0;
