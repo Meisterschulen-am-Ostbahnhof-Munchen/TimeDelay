@@ -7,24 +7,10 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-#include <stdio.h>
-#include <string.h>
-#include <stdint.h>
-
-
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include "hal/gpio_types.h"
 #include "driver/gpio.h"
 #include "sdkconfig.h"
-#include "esp_system.h"
-#include "TimeLib.h"
-#include "StandardLib.h"
-#include "TimerSettings.h"
-#include "StandardLibObserved.h"
-#include "UtilLib.h"
-#include "ExtraLib.h"
-#include "BasicLib.h"
 #include "Automation_FOUR_POSITION.h"
 #include "AutomationTimer_FOUR_POSITION.h"
 

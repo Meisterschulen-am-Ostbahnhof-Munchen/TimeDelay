@@ -7,22 +7,11 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-#include <stdio.h>
-#include <string.h>
-
-
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
-#include "hal/gpio_types.h"
 #include "driver/gpio.h"
 #include "sdkconfig.h"
-#include "esp_system.h"
-#include "TimeLib.h"
 #include "StandardLib.h"
-#include "UtilLib.h"
-#include "ExtraLib.h"
-#include "BasicLib.h"
-#include "Automation.h"
 
 #define LOG_LOCAL_LEVEL ESP_LOG_INFO
 #include "esp_log.h"
