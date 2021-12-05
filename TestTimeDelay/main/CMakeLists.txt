@@ -9,6 +9,9 @@ if(CONFIG_EXAMPLE_TOF)
 	set(COMPONENT_SRCS  "examples/EXAMPLE_TOF/main.cpp")
 endif()
 
+if(CONFIG_EXAMPLE_BLINK)
+    set(COMPONENT_SRCS  "examples/EXAMPLE_BLINK/main.cpp")
+endif()
 
 if(CONFIG_4_TON_SUPERTEST)
 	set(COMPONENT_SRCS  "examples/4_TON_SUPERTEST/main.cpp")

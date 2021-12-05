@@ -1,4 +1,4 @@
-/* main.c - Application main entry point */
+/* FOUR_POSITION_TOF/main.cpp - Application main entry point */
 
 /*
  * Copyright (c) 2017 Intel Corporation

@@ -13,6 +13,9 @@ menu "### TestTON Example Configuration ###"
         config EXAMPLE_TOF
             bool "EXAMPLE_TOF"
             
+        config EXAMPLE_BLINK
+            bool "EXAMPLE_BLINK"
+            
         config 4_TON_SUPERTEST
         	bool "4 TON Supertest !"
 

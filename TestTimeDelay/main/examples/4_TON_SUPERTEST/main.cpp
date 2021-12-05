@@ -1,4 +1,4 @@
-/* main.c - Application main entry point */
+/* 4_TON_SUPERTEST/main.cpp - Application main entry point */
 
 /*
  * Copyright (c) 2017 Intel Corporation
@@ -35,7 +35,7 @@ extern "C" void app_main(void)
 
 
 
-    ESP_LOGI(TAG, "Initializing...");
+    ESP_LOGI(TAG, "Initializing 4_TON_SUPERTEST...");
 
     /* Configure the IOMUX register for pad BLINK_GPIO (some pads are
        muxed to GPIO on reset already, but some default to other
@@ -103,9 +103,8 @@ extern "C" void app_main(void)
         gpio_set_level(GPIO_Q3, TON3.Q);
         gpio_set_level(GPIO_Q4, TON4.Q);
 
-        // 100ms warten
+        // 100ms warten  = Intervallzeit des Tasks
         vTaskDelay(100 / portTICK_PERIOD_MS); // 100ms cycle for Test.
-
     }
 }
 
