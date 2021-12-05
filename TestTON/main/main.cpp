@@ -25,8 +25,8 @@
 #include "UtilLib.h"
 #include "ExtraLib.h"
 #include "BasicLib.h"
-#include "Automation.h"
-#include "AutomationTimer.h"
+#include "Automation_FOUR_POSITION.h"
+#include "AutomationTimer_FOUR_POSITION.h"
 
 #define LOG_LOCAL_LEVEL ESP_LOG_INFO
 #include "esp_log.h"
@@ -35,7 +35,7 @@
 const char *TIMER_2 = "timer_2";
 const char *TIMER_1 = "timer_1";
 
-static const char *TAG = "impulse_switch";
+static const char * const TAG = "impulse_switch";
 static int I1 = 0;
 static int I2 = 0;
 static int I3 = 0;
@@ -93,9 +93,9 @@ extern "C" void app_main(void)
 
 
 
-	THREE_POSITION_SWITCH SWITCH;
-	THREE_POSITION_TOF    TIMER;
-	THREE_POSITION_VALVE  VALVE;
+	FOUR_POSITION_SWITCH SWITCH;
+	FOUR_POSITION_TOF    TIMER;
+	VALVE_WITH_FLOAT     VALVE;
 	TIMER.PT = 3000;
 
 
@@ -108,6 +108,7 @@ extern "C" void app_main(void)
 
     	SWITCH.I1 = I1;
     	SWITCH.I2 = I2;
+    	SWITCH.I3 = I3;
     	SWITCH();
     	TIMER.IN = SWITCH.State;
     	TIMER();
@@ -119,8 +120,8 @@ extern "C" void app_main(void)
 
     	gpio_set_level(GPIO_Q1, VALVE.Q1);
         gpio_set_level(GPIO_Q2, VALVE.Q2);
-        gpio_set_level(GPIO_Q3, I3);
-        gpio_set_level(GPIO_Q4, 0);
+        gpio_set_level(GPIO_Q3, VALVE.Q3);
+        gpio_set_level(GPIO_Q4, VALVE.Q4);
 
 
         vTaskDelay(100 / portTICK_PERIOD_MS); // 100ms cycle for Test.
