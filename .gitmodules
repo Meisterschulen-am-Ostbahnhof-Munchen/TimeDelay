@@ -1,3 +1,3 @@
 [submodule "TestTimeDelay/components/PlcLib"]
 	path = TestTimeDelay/components/PlcLib
-	url = git@github.com:Meisterschulen-am-Ostbahnhof-Munchen/PlcLib.git
+	url = https://github.com/Meisterschulen-am-Ostbahnhof-Munchen/PlcLib.git
