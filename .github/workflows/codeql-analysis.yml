@@ -62,9 +62,15 @@ jobs:
     #    and modify them (or add more) to build your code if your project
     #    uses a compiled language
 
-    #- run: |
-    #   make bootstrap
-    #   make release
+    - run: |
+        export PROJECT_PATH=$PWD
+        cd $PROJECT_PATH/.github/workflows
+        git clone --recursive https://github.com/espressif/esp-idf
+        ./esp-idf/install.sh
+        . ./esp-idf/export.sh
+        echo $PATH
+        cd $PROJECT_PATH/TestTimeDelay
+        idf.py build
 
     - name: Perform CodeQL Analysis
       uses: github/codeql-action/analyze@v1
