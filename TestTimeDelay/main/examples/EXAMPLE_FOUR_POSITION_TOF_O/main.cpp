@@ -39,6 +39,16 @@ static int I3 = 0;
 
 
 
+SettingsAdapter*   	settingsAdapter    = new SettingsAdapter;
+TimerSettings*   	timerSettings      = TimerSettings::getInstance(settingsAdapter);
+
+
+
+FOUR_POSITION_SWITCH SWITCH;
+FOUR_POSITION_TOF_O    TIMER(timerSettings, "TOF1");
+VALVE_WITH_FLOAT     VALVE;
+
+
 
 
 /* Inside .cpp file, app_main function must be declared with C linkage */
@@ -81,17 +91,6 @@ extern "C" void app_main(void)
     gpio_set_level(GPIO_Q4, 0); //set to 0 at Reset.
 
 
-
-
-    SettingsAdapter*   	settingsAdapter    = new SettingsAdapter;
-    TimerSettings::setForward(settingsAdapter);
-    TimerSettings*   	timerSettings      = TimerSettings::getInstance();
-
-
-
-    FOUR_POSITION_SWITCH SWITCH;
-    FOUR_POSITION_TOF_O    TIMER(timerSettings, "TOF1");
-    VALVE_WITH_FLOAT     VALVE;
 
 
 

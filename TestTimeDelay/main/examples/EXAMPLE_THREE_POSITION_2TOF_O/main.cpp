@@ -33,7 +33,14 @@ static int I2 = 0;
 
 
 
+SettingsAdapter*   	settingsAdapter    = new SettingsAdapter;
+TimerSettings2*   	timerSettings      = TimerSettings2::getInstance(settingsAdapter);
 
+
+
+THREE_POSITION_SWITCH SWITCH;
+THREE_POSITION_2TOF_O    TIMER(timerSettings, "TOF1_up", "TOF1_down");
+THREE_POSITION_VALVE     VALVE;
 
 
 /* Inside .cpp file, app_main function must be declared with C linkage */
@@ -70,15 +77,7 @@ extern "C" void app_main(void)
 
 
 
-    SettingsAdapter*   	settingsAdapter    = new SettingsAdapter;
-    TimerSettings2::setForward(settingsAdapter);
-    TimerSettings2*   	timerSettings      = TimerSettings2::getInstance();
 
-
-
-    THREE_POSITION_SWITCH SWITCH;
-    THREE_POSITION_2TOF_O    TIMER(timerSettings, "TOF1_up", "TOF1_down");
-    THREE_POSITION_VALVE     VALVE;
 
 
 

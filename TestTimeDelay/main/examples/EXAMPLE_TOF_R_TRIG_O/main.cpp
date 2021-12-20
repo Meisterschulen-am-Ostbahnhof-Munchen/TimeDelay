@@ -31,6 +31,16 @@ static const char * const TAG = "EXAMPLE_TOF_R_TRIG_O";
 
 
 
+
+
+SettingsAdapter*   	settingsAdapter    = new SettingsAdapter;
+TimerSettings*   	timerSettings      = TimerSettings::getInstance(settingsAdapter);
+
+TOF_R_TRIG_O TOF1(timerSettings, "TOF1");
+TOF_R_TRIG_O TOF2(timerSettings, "TOF2");
+
+
+
 /* Inside .cpp file, app_main function must be declared with C linkage */
 extern "C" void app_main(void)
 {
@@ -69,13 +79,6 @@ extern "C" void app_main(void)
     gpio_set_level(GPIO_Q2, 0); //set to 0 at Reset.
 
 
-
-    SettingsAdapter*   	settingsAdapter    = new SettingsAdapter;
-    TimerSettings::setForward(settingsAdapter);
-    TimerSettings*   	timerSettings      = TimerSettings::getInstance();
-
-    TOF_R_TRIG_O TOF1(timerSettings, "TOF1");
-    TOF_R_TRIG_O TOF2(timerSettings, "TOF2");
 
 
 
