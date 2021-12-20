@@ -16,6 +16,7 @@
 
 #include "spiffs_access.h"
 #include "settingsNVS.h"
+#include "SettingsAdapter.h"
 
 #define LOG_LOCAL_LEVEL ESP_LOG_INFO
 #include "esp_log.h"
@@ -73,8 +74,8 @@ extern "C" void app_main(void)
 
 
 
-
-    TimerSettings*   timerSettings        = new TimerSettings;
+    SettingsAdapter*   	settingsAdapter    = new SettingsAdapter;
+    TimerSettings*   	timerSettings      = new TimerSettings(settingsAdapter);
     TOF_R_TRIG_O TOF1(timerSettings, "TOF1");
     TOF_R_TRIG_O TOF2(timerSettings, "TOF2");
 
