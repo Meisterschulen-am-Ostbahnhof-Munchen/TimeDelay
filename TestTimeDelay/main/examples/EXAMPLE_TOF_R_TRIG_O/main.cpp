@@ -71,7 +71,9 @@ extern "C" void app_main(void)
 
 
     SettingsAdapter*   	settingsAdapter    = new SettingsAdapter;
-    TimerSettings*   	timerSettings      = new TimerSettings(settingsAdapter);
+    TimerSettings::setForward(settingsAdapter);
+    TimerSettings*   	timerSettings      = TimerSettings::getInstance();
+
     TOF_R_TRIG_O TOF1(timerSettings, "TOF1");
     TOF_R_TRIG_O TOF2(timerSettings, "TOF2");
 
