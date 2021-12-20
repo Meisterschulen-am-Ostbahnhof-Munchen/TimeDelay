@@ -59,20 +59,20 @@ if(CONFIG_THREE_POSITION_2TOF_Observed  )
     set(COMPONENT_SRCS  "examples/THREE_POSITION_2TOF_Observed/main.cpp")
 endif()
             
-if(CONFIG_FOUR_POSITION_TOF)
-    set(COMPONENT_SRCS  "examples/FOUR_POSITION_TOF/main.cpp")
+if(CONFIG_EXAMPLE_FOUR_POSITION_TOF)
+    set(COMPONENT_SRCS  "examples/EXAMPLE_FOUR_POSITION_TOF/main.cpp")
 endif()
             
-if(CONFIG_FOUR_POSITION_TOF_Observed)
-    set(COMPONENT_SRCS  "examples/FOUR_POSITION_TOF_Observed/main.cpp")
+if(CONFIG_EXAMPLE_FOUR_POSITION_TOF_Observed)
+    set(COMPONENT_SRCS  "examples/EXAMPLE_FOUR_POSITION_TOF_Observed/main.cpp")
 endif()
                             
-if(CONFIG_FOUR_POSITION_3TOF)
-    set(COMPONENT_SRCS  "examples/FOUR_POSITION_3TOF/main.cpp")
+if(CONFIG_EXAMPLE_FOUR_POSITION_3TOF)
+    set(COMPONENT_SRCS  "examples/EXAMPLE_FOUR_POSITION_3TOF/main.cpp")
 endif()
             
-if(CONFIG_FOUR_POSITION_3TOF_Observed)
-    set(COMPONENT_SRCS  "examples/FOUR_POSITION_3TOF_Observed/main.cpp")
+if(CONFIG_EXAMPLE_FOUR_POSITION_3TOF_Observed)
+    set(COMPONENT_SRCS  "examples/EXAMPLE_FOUR_POSITION_3TOF_Observed/main.cpp")
 endif()
 
 set(COMPONENT_ADD_INCLUDEDIRS "")

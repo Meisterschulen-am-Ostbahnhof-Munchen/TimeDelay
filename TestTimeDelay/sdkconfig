@@ -151,10 +151,10 @@ CONFIG_EXAMPLE_TOF_R_TRIG_O=y
 # CONFIG_THREE_POSITION_TOF_Observed is not set
 # CONFIG_THREE_POSITION_2TOF is not set
 # CONFIG_THREE_POSITION_2TOF_Observed is not set
-# CONFIG_FOUR_POSITION_TOF is not set
-# CONFIG_FOUR_POSITION_TOF_Observed is not set
-# CONFIG_FOUR_POSITION_3TOF is not set
-# CONFIG_FOUR_POSITION_3TOF_Observed is not set
+# CONFIG_EXAMPLE_FOUR_POSITION_TOF is not set
+# CONFIG_EXAMPLE_FOUR_POSITION_TOF_Observed is not set
+# CONFIG_EXAMPLE_FOUR_POSITION_3TOF is not set
+# CONFIG_EXAMPLE_FOUR_POSITION_3TOF_Observed is not set
 # end of ### TestTON Example Configuration ###
 
 #

@@ -52,17 +52,17 @@ menu "### TestTON Example Configuration ###"
         config THREE_POSITION_2TOF_Observed
             bool "THREE_POSITION_2TOF_Observed"    
             
-        config FOUR_POSITION_TOF
-            bool "FOUR_POSITION_TOF"
+        config EXAMPLE_FOUR_POSITION_TOF
+            bool "EXAMPLE_FOUR_POSITION_TOF"
             
-        config FOUR_POSITION_TOF_Observed
-            bool "FOUR_POSITION_TOF_Observed"
+        config EXAMPLE_FOUR_POSITION_TOF_Observed
+            bool "EXAMPLE_FOUR_POSITION_TOF_Observed"
                             
-        config FOUR_POSITION_3TOF
-            bool "FOUR_POSITION_3TOF"
+        config EXAMPLE_FOUR_POSITION_3TOF
+            bool "EXAMPLE_FOUR_POSITION_3TOF"
             
-        config FOUR_POSITION_3TOF_Observed
-            bool "FOUR_POSITION_3TOF_Observed"
+        config EXAMPLE_FOUR_POSITION_3TOF_Observed
+            bool "EXAMPLE_FOUR_POSITION_3TOF_Observed"
                 
                 
     endchoice # EXAMPLE_TYPE
