@@ -193,7 +193,7 @@ size_t Settings::getString(const char section[], const char key[], const char de
 		Settings::setString(section, key, defaultValue);
 	}
 	ESP_LOGI(TAG, "getString, section = %s, key = %s, value = %s", section, key, captionOut);
-	return strlen(captionOut);
+	return (Strlen(captionOut);
 }
 
 
@@ -309,72 +309,72 @@ void Settings_init(void)
 
 int8_t getS8(const char section[], const char key[], const int8_t defaultValue)
 {
-	return Settings::getS8(section, key, defaultValue);
+	return (Settings::getS8(section, key, defaultValue));
 }
 
 int16_t getS16(const char section[], const char key[], const int16_t defaultValue)
 {
-	return Settings::getS16(section, key, defaultValue);
+	return (Settings::getS16(section, key, defaultValue));
 }
 
 int32_t getS32(const char section[], const char key[], const int32_t defaultValue)
 {
-	return Settings::getS32(section, key, defaultValue);
+	return (Settings::getS32(section, key, defaultValue));
 }
 
 int64_t getS64(const char section[], const char key[], const int64_t defaultValue)
 {
-    return Settings::getS64(section, key, defaultValue);
+    return (Settings::getS64(section, key, defaultValue));
 }
 
 uint8_t getU8(const char section[], const char key[], const uint8_t defaultValue)
 {
-	return Settings::getU8(section, key, defaultValue);
+	return (Settings::getU8(section, key, defaultValue));
 }
 
 uint16_t getU16(const char section[], const char key[], const uint16_t defaultValue)
 {
-	return Settings::getU16(section, key, defaultValue);
+	return (Settings::getU16(section, key, defaultValue));
 }
 
 uint32_t getU32(const char section[], const char key[], const uint32_t defaultValue)
 {
-	return Settings::getU32(section, key, defaultValue);
+	return (Settings::getU32(section, key, defaultValue));
 }
 
 uint64_t getU64(const char section[], const char key[], const uint64_t defaultValue)
 {
-	return Settings::getU64(section, key, defaultValue);
+	return (Settings::getU64(section, key, defaultValue));
 }
 
 uint64_t getX64(const char section[], const char key[], const uint64_t defaultValue)
 {
-	return Settings::getX64(section, key, defaultValue);
+	return (Settings::getX64(section, key, defaultValue));
 }
 
 size_t getString(const char section[], const char key[], const char defaultValue[], char caption[], size_t size)
 {
-	return Settings::getString(section, key, defaultValue, caption, size);
+	return (Settings::getString(section, key, defaultValue, caption, size));
 }
 
 void setS8(const char section[], const char key[], const int8_t value)
 {
-	return Settings::setS8(section, key, value);
+	return (Settings::setS8(section, key, value));
 }
 
 void setS16(const char section[], const char key[], const int16_t value)
 {
-	return Settings::setS16(section, key, value);
+	return (Settings::setS16(section, key, value));
 }
 
 void setS32(const char section[], const char key[], const int32_t value)
 {
-	return Settings::setS32(section, key, value);
+	return (Settings::setS32(section, key, value));
 }
 
 void setS64(const char section[], const char key[], const int64_t value)
 {
-	return Settings::setS64(section, key, value);
+	return (Settings::setS64(section, key, value));
 }
 
 void setU8(const char section[], const char key[], const uint8_t value)
