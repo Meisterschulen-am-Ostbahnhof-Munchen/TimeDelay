@@ -28,6 +28,9 @@ menu "### TestTON Example Configuration ###"
         config EXAMPLE_TOF
             bool "EXAMPLE_TOF"
             
+        config EXAMPLE_TOF_R_TRIG_O
+            bool "EXAMPLE_TOF_R_TRIG_O"
+            
         config EXAMPLE_TRIG
             bool "EXAMPLE_TRIG"
             
@@ -62,6 +65,6 @@ menu "### TestTON Example Configuration ###"
             bool "FOUR_POSITION_3TOF_Observed"
                 
                 
-    endchoice # EXAMPLE_ETHERNET_TYPE
+    endchoice # EXAMPLE_TYPE
 
 endmenu
