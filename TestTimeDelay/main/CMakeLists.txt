@@ -27,7 +27,7 @@ if(CONFIG_EXAMPLE_TOF)
 	set(COMPONENT_SRCS  "examples/EXAMPLE_TOF/main.cpp")
 endif()
 
-if(EXAMPLE_TOF_R_TRIG_O)
+if(CONFIG_EXAMPLE_TOF_R_TRIG_O)
     set(COMPONENT_SRCS  "examples/EXAMPLE_TOF_R_TRIG_O/main.cpp")
 endif()
 
