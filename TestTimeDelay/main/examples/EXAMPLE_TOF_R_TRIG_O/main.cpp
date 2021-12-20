@@ -14,7 +14,6 @@
 #include "TimerSettings.h"
 #include "StandardLibObserved.h"
 
-#include "spiffs_access.h"
 #include "settingsNVS.h"
 #include "SettingsAdapter.h"
 
@@ -40,9 +39,6 @@ extern "C" void app_main(void)
     ESP_LOGI(TAG, "Initializing EXAMPLE_TOF_R_TRIG_O ...");
 
 
-
-	/* Initialize file storage */
-	ESP_ERROR_CHECK(init_spiffs());
 
 
 	/* Initialize application */
