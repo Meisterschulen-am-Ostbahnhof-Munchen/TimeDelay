@@ -11,8 +11,12 @@
 #include "freertos/task.h"
 #include "driver/gpio.h"
 #include "sdkconfig.h"
+#include "TimerSettings3.h"
 #include "Automation_FOUR_POSITION.h"
-#include "AutomationTimer_FOUR_POSITION_3TOF.h"
+#include "AutomationTimer_FOUR_POSITION_3TOFObserved.h"
+
+#include "settingsNVS.h"
+#include "SettingsAdapter.h"
 
 #define LOG_LOCAL_LEVEL ESP_LOG_INFO
 #include "esp_log.h"
@@ -44,6 +48,11 @@ extern "C" void app_main(void)
 
     ESP_LOGI(TAG, "Initializing...");
 
+
+
+	/* Initialize application */
+	Settings_init();
+
     /* Configure the IOMUX register for pad BLINK_GPIO (some pads are
        muxed to GPIO on reset already, but some default to other
        functions and need to be switched to GPIO. Consult the
@@ -73,15 +82,16 @@ extern "C" void app_main(void)
 
 
 
+    SettingsAdapter*   	settingsAdapter    = new SettingsAdapter;
+    TimerSettings3::setForward(settingsAdapter);
+    TimerSettings3*   	timerSettings      = TimerSettings3::getInstance();
 
 
 
     FOUR_POSITION_SWITCH SWITCH;
-    FOUR_POSITION_3TOF    TIMER;
+    FOUR_POSITION_3TOF_O    TIMER(timerSettings, "TOF1_up", "TOF1_down", "TOF1_float");
     VALVE_WITH_FLOAT     VALVE;
-    TIMER.PT_up = 3000;
-    TIMER.PT_down = 500;
-    TIMER.PT_float = 8000;
+
 
 
     while (true) {
