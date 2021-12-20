@@ -77,7 +77,7 @@ extern "C" void app_main(void)
 
 
     THREE_POSITION_SWITCH SWITCH;
-    THREE_POSITION_2TOF_O    TIMER(timerSettings, "TOF1");;
+    THREE_POSITION_2TOF_O    TIMER(timerSettings, "TOF1_up", "TOF1_down");
     THREE_POSITION_VALVE     VALVE;
 
 
