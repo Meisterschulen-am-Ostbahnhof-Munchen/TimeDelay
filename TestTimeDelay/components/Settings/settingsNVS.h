@@ -4,8 +4,8 @@
    \brief       Helper functions for reading and writing settings to a file.
 */
 /* ************************************************************************ */
-#ifndef DEF_SETTINGS_H
-#define DEF_SETTINGS_H
+#ifndef COMPONENTS_SETTINGS_SETTINGSNVS_H_
+#define COMPONENTS_SETTINGS_SETTINGSNVS_H_
 
 
 #ifdef __cplusplus
@@ -43,5 +43,5 @@ extern "C" {
 } /* extern "C" { */
 #endif
 
-#endif /* DEF_SETTINGS_H */
+#endif /* COMPONENTS_SETTINGS_SETTINGSNVS_H_ */
 /* ************************************************************************ */

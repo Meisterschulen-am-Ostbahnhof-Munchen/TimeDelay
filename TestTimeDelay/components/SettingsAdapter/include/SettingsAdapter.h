@@ -1,0 +1,8 @@
+
+
+
+
+class SettingsAdapter : public Settings
+{
+
+};

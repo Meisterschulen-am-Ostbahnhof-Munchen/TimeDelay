@@ -14,6 +14,9 @@
 #include "TimerSettings.h"
 #include "StandardLibObserved.h"
 
+#include "spiffs_access.h"
+#include "settingsNVS.h"
+
 #define LOG_LOCAL_LEVEL ESP_LOG_INFO
 #include "esp_log.h"
 
@@ -34,6 +37,19 @@ extern "C" void app_main(void)
 
 
     ESP_LOGI(TAG, "Initializing EXAMPLE_TOF_R_TRIG_O ...");
+
+
+
+	/* Initialize file storage */
+	ESP_ERROR_CHECK(init_spiffs());
+
+
+	/* Initialize application */
+	Settings_init();
+
+
+
+
 
     /* Configure the IOMUX register for pad BLINK_GPIO (some pads are
        muxed to GPIO on reset already, but some default to other

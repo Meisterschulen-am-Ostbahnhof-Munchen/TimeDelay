@@ -126,6 +126,14 @@ CONFIG_PARTITION_TABLE_MD5=y
 # end of Partition Table
 
 #
+# SETTINGS API
+#
+# CONFIG_SETTINGS_DEBUG is not set
+CONFIG_SETTINGS_DEBUG_TAG="SETTINGS API"
+CONFIG_SETTINGS_NAMESPACE="storage"
+# end of SETTINGS API
+
+#
 # ### TestTON Example Configuration ###
 #
 # CONFIG_EXAMPLE_AND is not set
