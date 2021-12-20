@@ -16,7 +16,7 @@
 #define LOG_LOCAL_LEVEL ESP_LOG_INFO
 #include "esp_log.h"
 
-static const char * const TAG = "impulse_switch";
+static const char * const TAG = "4_TON_SUPERTEST";
 
 
 #define BUTTON_I1 GPIO_NUM_26        // Pin 26.
