@@ -6,16 +6,12 @@
 
 
 #include "SettingsAdapter.h"
-#include "settingsNVS.h"
 
-SettingsAdapter::SettingsAdapter() {
-
-}
 
 int32_t SettingsAdapter::getPT(const char *key) const {
-	return (getS32("CF-A", key, 0));
+	return (SettingsAdapter::getS32("CF-A", key, 0));
 }
 
 void SettingsAdapter::setPT(const char *key, int32_t PT) {
-	setS32("CF-A", key, PT);
+	SettingsAdapter::setS32("CF-A", key, PT);
 }

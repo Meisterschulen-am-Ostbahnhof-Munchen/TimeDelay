@@ -14,6 +14,7 @@ class Settings
 private:
     // Internal implementation class
 	struct Impl;
+protected:
 	Settings() = default;
 public :
 
