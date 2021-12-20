@@ -40,17 +40,17 @@ menu "### TestTON Example Configuration ###"
         config EXAMPLE_4_TON_SUPERTEST
         	bool "EXAMPLE 4 TON Supertest !"
 
-        config THREE_POSITION_TOF
-            bool "THREE_POSITION_TOF"
+        config EXAMPLE_THREE_POSITION_TOF
+            bool "EXAMPLE_THREE_POSITION_TOF"
             
-        config THREE_POSITION_TOF_O
-            bool "THREE_POSITION_TOF_Observed"
+        config EXAMPLE_THREE_POSITION_TOF_O
+            bool "EXAMPLE_THREE_POSITION_TOF_Observed"
             
-        config THREE_POSITION_2TOF
-            bool "THREE_POSITION_2TOF"
+        config EXAMPLE_THREE_POSITION_2TOF
+            bool "EXAMPLE_THREE_POSITION_2TOF"
             
-        config THREE_POSITION_2TOF_O
-            bool "THREE_POSITION_2TOF_Observed"    
+        config EXAMPLE_THREE_POSITION_2TOF_O
+            bool "EXAMPLE_THREE_POSITION_2TOF_Observed"    
             
         config EXAMPLE_FOUR_POSITION_TOF
             bool "EXAMPLE_FOUR_POSITION_TOF"
