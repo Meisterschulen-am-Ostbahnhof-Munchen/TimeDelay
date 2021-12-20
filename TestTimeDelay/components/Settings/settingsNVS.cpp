@@ -193,7 +193,7 @@ size_t Settings::getString(const char section[], const char key[], const char de
 		Settings::setString(section, key, defaultValue);
 	}
 	ESP_LOGI(TAG, "getString, section = %s, key = %s, value = %s", section, key, captionOut);
-	return (Strlen(captionOut);
+	return (strlen(captionOut));
 }
 
 
