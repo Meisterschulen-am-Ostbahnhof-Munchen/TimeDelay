@@ -73,7 +73,7 @@ int8_t Settings::getS8(const char section[], const char key[], const int8_t defa
 		Settings::setS8(section, key, value);
 	}
 	ESP_LOGI(TAG, "setS8, section = %s, key = %s, value = %i", section, key, value);
-	return value;
+	return (value);
 }
 
 int16_t Settings::getS16(const char section[], const char key[], const int16_t defaultValue)
@@ -86,7 +86,7 @@ int16_t Settings::getS16(const char section[], const char key[], const int16_t d
 		Settings::setS16(section, key, value);
 	}
 	ESP_LOGI(TAG, "getS16, section = %s, key = %s, value = %i", section, key, value);
-	return value;
+	return (value);
 }
 
 int32_t Settings::getS32(const char section[], const char key[], const int32_t defaultValue)
@@ -99,7 +99,7 @@ int32_t Settings::getS32(const char section[], const char key[], const int32_t d
 		Settings::setS32(section, key, value);
 	}
 	ESP_LOGI(TAG, "getS32, section = %s, key = %s, value = %i", section, key, value);
-	return value;
+	return (value);
 }
 
 int64_t Settings::getS64(const char section[], const char key[], const int64_t defaultValue)
@@ -112,7 +112,7 @@ int64_t Settings::getS64(const char section[], const char key[], const int64_t d
 		Settings::setS64(section, key, value);
 	}
 	ESP_LOGI(TAG, "getS64, section = %s, key = %s, value = %lli", section, key, value);
-	return value;
+	return (value);
 }
 
 uint8_t Settings::getU8(const char section[], const char key[], const uint8_t defaultValue)
@@ -125,7 +125,7 @@ uint8_t Settings::getU8(const char section[], const char key[], const uint8_t de
 		Settings::setU8(section, key, value);
 	}
 	ESP_LOGI(TAG, "getU8, section = %s, key = %s, value = %u", section, key, value);
-	return value;
+	return (value);
 }
 
 uint16_t Settings::getU16(const char section[], const char key[], const uint16_t defaultValue)
@@ -138,7 +138,7 @@ uint16_t Settings::getU16(const char section[], const char key[], const uint16_t
 		Settings::setU16(section, key, value);
 	}
 	ESP_LOGI(TAG, "getU16, section = %s, key = %s, value = %u", section, key, value);
-	return value;
+	return (value);
 }
 
 uint32_t Settings::getU32(const char section[], const char key[], const uint32_t defaultValue)
@@ -151,7 +151,7 @@ uint32_t Settings::getU32(const char section[], const char key[], const uint32_t
 		Settings::setU32(section, key, value);
 	}
 	ESP_LOGI(TAG, "getU32, section = %s, key = %s, value = %u", section, key, value);
-	return value;
+	return (value);
 }
 
 uint64_t Settings::getU64(const char section[], const char key[], const uint64_t defaultValue)
@@ -164,7 +164,7 @@ uint64_t Settings::getU64(const char section[], const char key[], const uint64_t
 		Settings::setU64(section, key, value);
 	}
 	ESP_LOGI(TAG, "getU64, section = %s, key = %s, value = %llu", section, key, value);
-	return value;
+	return (value);
 }
 
 uint64_t Settings::getX64(const char section[], const char key[], const uint64_t defaultValue)
@@ -177,7 +177,7 @@ uint64_t Settings::getX64(const char section[], const char key[], const uint64_t
 		Settings::setX64(section, key, value);
 	}
 	ESP_LOGI(TAG, "getX64, section = %s, key = %s, value = %llX", section, key, value);
-	return value;
+	return (value);
 }
 
 size_t Settings::getString(const char section[], const char key[], const char defaultValue[], char captionOut[], size_t size)
