@@ -12,19 +12,31 @@ List<Item>::List(long size) : _size(size), _count(0) {
     _items = new Item[size]; 
 }
 
-// TODO: Copy constructor.
+template<class Item>
+List<Item>::List(List<Item> &list) : _size(list._size), _count(list._count) {
+	_items = list._items;
+}
+
 
 template<class Item> 
 List<Item>::~List() {
     delete[] _items;
 }
 
-// TODO: operator=
-  
+template<class Item>
+List<Item>& List<Item>::operator =(const List<Item> &constList) {
+    if (this != &constList) // no self-assignment.
+    {
+    	_size = constList._size;
+    	_count = constList._count;
+    	_items = constList._items;
+    }
+    return (*this);
+}
 
 template<class Item> 
 long List<Item>::Count() const {
-    return _count;
+    return (_count);
 }
 
 // TODO:
@@ -33,31 +45,31 @@ long List<Item>::Count() const {
 template<class Item> 
 Item& List<Item>::Get(long index) const {
     if (_count <= _size) {
-      return _items[index];
+      return (_items[index]);
     } else {
       // throw RangeError exception
-      return _items[index];
+      return (_items[index]);
     }
 }
 
 template<class Item> 
 Item& List<Item>::First() const {
-    return Get(0);
+    return (Get(0));
 }
 
 template<class Item> 
 Item& List<Item>::Last() const {
-  return Get(Count()-1);
+  return (Get(Count()-1));
 }
 
 template<class Item> 
 bool List<Item>::Includes(const Item& anItem) const {
     for (long i = 0; i < Count(); i++) {
         if (_items[i] == anItem) {
-            return true;
+            return (true);
         }
     }
-    return false;
+    return (false);
 }
 
 
@@ -106,7 +118,7 @@ void List<Item>::RemoveAll() {
 
 template<class Item> 
 Item& List<Item>::Top() const {
-    return Last();
+    return (Last());
 }
 
 template<class Item> 
@@ -119,8 +131,9 @@ Item& List<Item>::Pop()
 {
     Item& top = Last();
     RemoveLast();
-    return top; 
+    return (top);
 }
+
 
 
 template<class Item> 
@@ -135,5 +148,5 @@ void List<Item>::RemoveAt(long index) {
 
 template<class Item> 
 Iterator<Item>* List<Item>::CreateIterator() const {
-  return new ListIterator<Item>(this);
+  return (new ListIterator<Item>(this));
 }

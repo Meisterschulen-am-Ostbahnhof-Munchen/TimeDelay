@@ -28,40 +28,43 @@ menu "### TestTON Example Configuration ###"
         config EXAMPLE_TOF
             bool "EXAMPLE_TOF"
             
+        config EXAMPLE_TOF_R_TRIG_O
+            bool "EXAMPLE_TOF_R_TRIG_O"
+            
         config EXAMPLE_TRIG
             bool "EXAMPLE_TRIG"
             
         config EXAMPLE_BLINK
             bool "EXAMPLE_BLINK"
             
-        config 4_TON_SUPERTEST
-        	bool "4 TON Supertest !"
+        config EXAMPLE_4_TON_SUPERTEST
+        	bool "EXAMPLE 4 TON Supertest !"
 
-        config THREE_POSITION_TOF
-            bool "THREE_POSITION_TOF"
+        config EXAMPLE_THREE_POSITION_TOF
+            bool "EXAMPLE_THREE_POSITION_TOF"
             
-        config THREE_POSITION_TOF_Observed
-            bool "THREE_POSITION_TOF_Observed"
+        config EXAMPLE_THREE_POSITION_TOF_O
+            bool "EXAMPLE_THREE_POSITION_TOF_Observed"
             
-        config THREE_POSITION_2TOF
-            bool "THREE_POSITION_2TOF"
+        config EXAMPLE_THREE_POSITION_2TOF
+            bool "EXAMPLE_THREE_POSITION_2TOF"
             
-        config THREE_POSITION_2TOF_Observed
-            bool "THREE_POSITION_2TOF_Observed"    
+        config EXAMPLE_THREE_POSITION_2TOF_O
+            bool "EXAMPLE_THREE_POSITION_2TOF_Observed"    
             
-        config FOUR_POSITION_TOF
-            bool "FOUR_POSITION_TOF"
+        config EXAMPLE_FOUR_POSITION_TOF
+            bool "EXAMPLE_FOUR_POSITION_TOF"
             
-        config FOUR_POSITION_TOF_Observed
-            bool "FOUR_POSITION_TOF_Observed"
+        config EXAMPLE_FOUR_POSITION_TOF_O
+            bool "EXAMPLE_FOUR_POSITION_TOF_Observed"
                             
-        config FOUR_POSITION_3TOF
-            bool "FOUR_POSITION_3TOF"
+        config EXAMPLE_FOUR_POSITION_3TOF
+            bool "EXAMPLE_FOUR_POSITION_3TOF"
             
-        config FOUR_POSITION_3TOF_Observed
-            bool "FOUR_POSITION_3TOF_Observed"
+        config EXAMPLE_FOUR_POSITION_3TOF_O
+            bool "EXAMPLE_FOUR_POSITION_3TOF_Observed"
                 
                 
-    endchoice # EXAMPLE_ETHERNET_TYPE
+    endchoice # EXAMPLE_TYPE
 
 endmenu
