@@ -10,7 +10,7 @@ set(EXTRA_COMPONENT_DIRS "../TestTimeDelay/components")
 # - when invoking CMake directly: cmake -D TEST_COMPONENTS="xxxxx" ..
 # - when using idf.py: idf.py -T xxxxx build
 #
-set(TEST_COMPONENTS "PlcLib" CACHE STRING "List of components to test")
+set(TEST_COMPONENTS "PlcLib" "Settings" CACHE STRING "List of components to test")
 
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)
 project(unit_test_test)
