@@ -4,6 +4,8 @@ TimeDelay like TON, TOF and Variations.
 
 ![C/C++ CI](https://github.com/Meisterschulen-am-Ostbahnhof-Munchen/TimeDelay/actions/workflows/build.yml/badge.svg)
 
+[![CII Best Practices](https://bestpractices.coreinfrastructure.org/projects/5416/badge)](https://bestpractices.coreinfrastructure.org/projects/5416)
+
 [![Lines of Code](https://sonarcloud.io/api/project_badges/measure?project=Meisterschulen-am-Ostbahnhof-Munchen_TimeDelay&metric=ncloc)](https://sonarcloud.io/summary/new_code?id=Meisterschulen-am-Ostbahnhof-Munchen_TimeDelay)
 
 [![Bugs](https://sonarcloud.io/api/project_badges/measure?project=Meisterschulen-am-Ostbahnhof-Munchen_TimeDelay&metric=bugs)](https://sonarcloud.io/summary/new_code?id=Meisterschulen-am-Ostbahnhof-Munchen_TimeDelay)
