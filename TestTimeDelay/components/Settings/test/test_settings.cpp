@@ -37,7 +37,7 @@ static const char *TAG = "test_settingsNVS"; // @suppress("Unused variable decla
 TEST_CASE("init", "[init]")
 {
 	/* Initialize application */
-	Settings_init();
+	initSettings();
 }
 
 
