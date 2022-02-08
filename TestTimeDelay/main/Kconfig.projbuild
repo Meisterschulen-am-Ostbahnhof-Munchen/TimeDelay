@@ -27,6 +27,9 @@ menu "### TestTON Example Configuration ###"
             
         config EXAMPLE_SR
             bool "EXAMPLE_SR"            
+            
+        config EXAMPLE_TOGGLE
+            bool "EXAMPLE_TOGGLE"   
                        
         config EXAMPLE_TON
             bool "EXAMPLE_TON"
