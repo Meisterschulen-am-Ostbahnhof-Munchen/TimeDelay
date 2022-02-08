@@ -8,6 +8,9 @@
 
 #include <stddef.h>
 #include <stdint.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string>
 #include <cstring>
 
 #include "settingsNVSinternal.h"
@@ -300,10 +303,7 @@ void Settings::eraseString(const char section[], const char key[])
 
 
 
-void Settings_init(void)
-{
-	Settings::init();
-}
+
 
 /* ************************************************************************ */
 
@@ -327,6 +327,8 @@ int64_t getS64(const char section[], const char key[], const int64_t defaultValu
     return (Settings::getS64(section, key, defaultValue));
 }
 
+/* ************************************************************************ */
+
 uint8_t getU8(const char section[], const char key[], const uint8_t defaultValue)
 {
 	return (Settings::getU8(section, key, defaultValue));
@@ -347,6 +349,8 @@ uint64_t getU64(const char section[], const char key[], const uint64_t defaultVa
 	return (Settings::getU64(section, key, defaultValue));
 }
 
+/* ************************************************************************ */
+
 uint64_t getX64(const char section[], const char key[], const uint64_t defaultValue)
 {
 	return (Settings::getX64(section, key, defaultValue));
@@ -356,6 +360,8 @@ size_t getString(const char section[], const char key[], const char defaultValue
 {
 	return (Settings::getString(section, key, defaultValue, caption, size));
 }
+
+/* ************************************************************************ */
 
 void setS8(const char section[], const char key[], const int8_t value)
 {
@@ -377,6 +383,8 @@ void setS64(const char section[], const char key[], const int64_t value)
 	return (Settings::setS64(section, key, value));
 }
 
+/* ************************************************************************ */
+
 void setU8(const char section[], const char key[], const uint8_t value)
 {
 	Settings::setU8(section, key, value);
@@ -397,6 +405,8 @@ void setU64(const char section[], const char key[], const uint64_t value)
 	Settings::setU64(section, key, value);
 }
 
+/* ************************************************************************ */
+
 void setX64(const char section[], const char key[], const uint64_t value)
 {
 	Settings::setX64(section, key, value);
@@ -406,11 +416,16 @@ void setString(const char section[], const char key[], const char value[])
 {
 	Settings::setString(section, key, value);
 }
+
+/* ************************************************************************ */
+
 void eraseString(const char section[], const char key[])
 {
 	Settings::eraseString(section, key);
 }
-
-
-
+/* ************************************************************************ */
+void initSettings(void)
+{
+	Settings::init();
+}
 /* ************************************************************************ */
