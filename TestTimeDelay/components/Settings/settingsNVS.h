@@ -23,7 +23,7 @@ extern "C" {
     uint64_t getU64(const char section[], const char key[], const uint64_t defaultValue);
     uint64_t getX64(const char section[], const char key[], const uint64_t defaultValue);
     size_t   getString(const char section[], const char key[], const char defaultValue[], char string[], size_t stringSize);
-
+/* ************************************************************************ */
     void setS8(const char section[], const char key[], const int8_t value);
     void setS16(const char section[], const char key[], const int16_t value);
     void setS32(const char section[], const char key[], const int32_t value);
@@ -34,9 +34,22 @@ extern "C" {
     void setU64(const char section[], const char key[], const uint64_t value);
     void setX64(const char section[], const char key[], const uint64_t value);
     void setString(const char section[], const char key[], const char value[]);
+/* ************************************************************************ */
     void eraseString(const char section[], const char key[]);
-
-    void Settings_init(void);
+/* ************************************************************************ */
+	//TODO
+    //uint32_t getSection(const char section[], char string[], uint32_t stringSize);
+	//TODO
+    //void     clearSection(const char section[]);
+/* ************************************************************************ */
+	//TODO
+    //void removeEntry(const char section[], const char key[]);
+	//TODO
+    //void createSection(const char section[]);
+	//TODO
+    //void removeSection(const char section[]);
+/* ************************************************************************ */
+    void initSettings(void);
 
 /* ************************************************************************ */
 #ifdef __cplusplus

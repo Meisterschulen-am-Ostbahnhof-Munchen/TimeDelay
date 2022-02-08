@@ -9,7 +9,7 @@
 
 #include <limits.h>
 #include "unity.h"
-#include "settings.h"
+#include "settingsNVS.h"
 #include "esp_log.h"
 
 
@@ -37,7 +37,7 @@ static const char *TAG = "test_settingsNVS"; // @suppress("Unused variable decla
 TEST_CASE("init", "[init]")
 {
 	/* Initialize application */
-	Settings_init();
+	initSettings();
 }
 
 

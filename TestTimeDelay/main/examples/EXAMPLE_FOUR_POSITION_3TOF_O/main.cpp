@@ -58,7 +58,7 @@ extern "C" void app_main(void)
 
 
 	/* Initialize application */
-	Settings_init();
+    initSettings();
 
     /* Configure the IOMUX register for pad BLINK_GPIO (some pads are
        muxed to GPIO on reset already, but some default to other

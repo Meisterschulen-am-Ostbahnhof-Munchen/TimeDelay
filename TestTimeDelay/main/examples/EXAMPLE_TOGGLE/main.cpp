@@ -1,4 +1,4 @@
-/* EXAMPLE_RS/main.cpp - Application main entry point */
+/* EXAMPLE_TOGGLE/main.cpp - Application main entry point */
 
 /*
  * Copyright (c) 2017 Intel Corporation
@@ -12,11 +12,12 @@
 #include "driver/gpio.h"
 #include "sdkconfig.h"
 #include "StandardLib.h"
+#include "BasicLib.h"
 
 #define LOG_LOCAL_LEVEL ESP_LOG_INFO
 #include "esp_log.h"
 
-static const char * const TAG = "EXAMPLE_RS";
+static const char * const TAG = "EXAMPLE_TOGGLE";
 
 
 #define BUTTON_I1 GPIO_NUM_26        // Pin 26.
@@ -30,7 +31,7 @@ extern "C" void app_main(void)
 {
 
 
-    ESP_LOGI(TAG, "Initializing EXAMPLE_RS ...");
+    ESP_LOGI(TAG, "Initializing EXAMPLE_TOGGLE ...");
 
     /* Configure the IOMUX register for pad BLINK_GPIO (some pads are
        muxed to GPIO on reset already, but some default to other
@@ -48,7 +49,7 @@ extern "C" void app_main(void)
     gpio_set_level(GPIO_Q1, 0); //set to 0 at Reset.
 
 
-    RS RS1;
+    TOGGLE TOGGLE1;
 
     while (true) // Endlos-Schleife
     {
@@ -56,13 +57,14 @@ extern "C" void app_main(void)
         bool I1 = not gpio_get_level(BUTTON_I1);
         bool I2 = not gpio_get_level(BUTTON_I2);
 
-        //RS1(SET, RESET1);
-        RS1(I1, I2);
+
+        TOGGLE1.RST = I2;
+        TOGGLE1(I1);
 
 
 
         // Ausgaenge setzen
-        gpio_set_level(GPIO_Q1, RS1.Q1);
+        gpio_set_level(GPIO_Q1, TOGGLE1.Q);
 
         // 100ms warten  = Intervallzeit des Tasks
         vTaskDelay(100 / portTICK_PERIOD_MS); // 100ms cycle for Test.
