@@ -32,7 +32,7 @@ if(CONFIG_EXAMPLE_RS)
 endif()
 
 if(CONFIG_EXAMPLE_SR)
-    set(COMPONENT_SRCS  "examples/EXAMPLE_RS/main.cpp")
+    set(COMPONENT_SRCS  "examples/EXAMPLE_SR/main.cpp")
 endif()
 
 if(CONFIG_EXAMPLE_TOGGLE)
