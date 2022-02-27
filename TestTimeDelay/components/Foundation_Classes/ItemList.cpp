@@ -138,7 +138,7 @@ Item& List<Item>::Pop()
 
 template<class Item> 
 void List<Item>::RemoveAt(long index) {
-    if (index < 0 || index >= Count())
+    if (index < 0 or index >= Count())
         std::cout << "Throw RangeException\n";
     for (long i = index; i < Count()-1; i++)
         _items[i] = _items[i+1];
