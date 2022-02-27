@@ -28,7 +28,7 @@ bool ListIterator<Item>::IsDone () const {
 
 template<class Item>
 ListIterator<Item>& ListIterator<Item>::operator =(const ListIterator<Item> &other) {
-    if (this != &other) // no self-assignment.
+    if (this not_eq &other) // no self-assignment.
     {
     	_list = other._list;
     	_current = other._current;
