@@ -25,7 +25,7 @@ List<Item>::~List() {
 
 template<class Item>
 List<Item>& List<Item>::operator =(const List<Item> &constList) {
-    if (this != &constList) // no self-assignment.
+    if (this not_eq &constList) // no self-assignment.
     {
     	_size = constList._size;
     	_count = constList._count;
