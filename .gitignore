@@ -34,3 +34,5 @@
 *.old
 
 *.old~main
+
+TestTimeDelay/build/

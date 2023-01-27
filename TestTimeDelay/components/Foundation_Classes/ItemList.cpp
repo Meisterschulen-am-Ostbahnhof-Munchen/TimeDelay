@@ -25,7 +25,7 @@ List<Item>::~List() {
 
 template<class Item>
 List<Item>& List<Item>::operator =(const List<Item> &constList) {
-    if (this != &constList) // no self-assignment.
+    if (this not_eq &constList) // no self-assignment.
     {
     	_size = constList._size;
     	_count = constList._count;
@@ -138,7 +138,7 @@ Item& List<Item>::Pop()
 
 template<class Item> 
 void List<Item>::RemoveAt(long index) {
-    if (index < 0 || index >= Count())
+    if (index < 0 or index >= Count())
         std::cout << "Throw RangeException\n";
     for (long i = index; i < Count()-1; i++)
         _items[i] = _items[i+1];

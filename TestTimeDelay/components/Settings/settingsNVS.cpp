@@ -43,7 +43,7 @@ void Settings::init(void)
 {
 	// Initialize NVS
 	esp_err_t err = nvs_flash_init();
-	if (err == ESP_ERR_NVS_NO_FREE_PAGES || err == ESP_ERR_NVS_NEW_VERSION_FOUND)
+	if (err == ESP_ERR_NVS_NO_FREE_PAGES or err == ESP_ERR_NVS_NEW_VERSION_FOUND)
 	{
 		// NVS partition was truncated and needs to be erased
 		// Retry nvs_flash_init
@@ -55,7 +55,7 @@ void Settings::init(void)
 	ESP_LOGD(TAG, "\n");
 	ESP_LOGD(TAG, "Opening Non-Volatile Storage (NVS) handle... ");
 	esp_err_t result = nvs_open("storage", NVS_READWRITE, &Impl::my_handle);
-	if (result != ESP_OK) {
+	if (result not_eq ESP_OK) {
 		ESP_LOGD(TAG, "Error (%s) opening NVS handle!\n", esp_err_to_name(result));
 	} else {
 		ESP_LOGD(TAG, "Done\n");
@@ -70,12 +70,12 @@ int8_t Settings::getS8(const char section[], const char key[], const int8_t defa
 {
 	int8_t value;
 	esp_err_t error = nvs_get_i8(Impl::my_handle, key, &value);
-	if (error != ESP_OK)
+	if (error not_eq ESP_OK)
 	{
 		value = defaultValue;
 		Settings::setS8(section, key, value);
 	}
-	ESP_LOGI(TAG, "setS8, section = %s, key = %s, value = %i", section, key, value);
+	ESP_LOGI(TAG, "setS8, section = %s, key = %s, value = %" PRIi8 "", section, key, value);
 	return (value);
 }
 
@@ -83,12 +83,12 @@ int16_t Settings::getS16(const char section[], const char key[], const int16_t d
 {
 	int16_t value;
 	esp_err_t error = nvs_get_i16(Impl::my_handle, key, &value);
-	if (error != ESP_OK)
+	if (error not_eq ESP_OK)
 	{
 		value = defaultValue;
 		Settings::setS16(section, key, value);
 	}
-	ESP_LOGI(TAG, "getS16, section = %s, key = %s, value = %i", section, key, value);
+	ESP_LOGI(TAG, "getS16, section = %s, key = %s, value = %" PRIi16 "", section, key, value);
 	return (value);
 }
 
@@ -96,12 +96,12 @@ int32_t Settings::getS32(const char section[], const char key[], const int32_t d
 {
 	int32_t value;
 	esp_err_t error = nvs_get_i32(Impl::my_handle, key, &value);
-	if (error != ESP_OK)
+	if (error not_eq ESP_OK)
 	{
 		value = defaultValue;
 		Settings::setS32(section, key, value);
 	}
-	ESP_LOGI(TAG, "getS32, section = %s, key = %s, value = %i", section, key, value);
+	ESP_LOGI(TAG, "getS32, section = %s, key = %s, value = %" PRIi32 "", section, key, value);
 	return (value);
 }
 
@@ -109,12 +109,12 @@ int64_t Settings::getS64(const char section[], const char key[], const int64_t d
 {
 	int64_t value;
 	esp_err_t error = nvs_get_i64(Impl::my_handle, key, &value);
-	if (error != ESP_OK)
+	if (error not_eq ESP_OK)
 	{
 		value = defaultValue;
 		Settings::setS64(section, key, value);
 	}
-	ESP_LOGI(TAG, "getS64, section = %s, key = %s, value = %lli", section, key, value);
+	ESP_LOGI(TAG, "getS64, section = %s, key = %s, value = %" PRIi64 "", section, key, value);
 	return (value);
 }
 
@@ -122,12 +122,12 @@ uint8_t Settings::getU8(const char section[], const char key[], const uint8_t de
 {
 	uint8_t value;
 	esp_err_t error = nvs_get_u8(Impl::my_handle, key, &value);
-	if (error != ESP_OK)
+	if (error not_eq ESP_OK)
 	{
 		value = defaultValue;
 		Settings::setU8(section, key, value);
 	}
-	ESP_LOGI(TAG, "getU8, section = %s, key = %s, value = %u", section, key, value);
+	ESP_LOGI(TAG, "getU8, section = %s, key = %s, value = %" PRIu8 "", section, key, value);
 	return (value);
 }
 
@@ -135,12 +135,12 @@ uint16_t Settings::getU16(const char section[], const char key[], const uint16_t
 {
 	uint16_t value;
 	esp_err_t error = nvs_get_u16(Impl::my_handle, key, &value);
-	if (error != ESP_OK)
+	if (error not_eq ESP_OK)
 	{
 		value = defaultValue;
 		Settings::setU16(section, key, value);
 	}
-	ESP_LOGI(TAG, "getU16, section = %s, key = %s, value = %u", section, key, value);
+	ESP_LOGI(TAG, "getU16, section = %s, key = %s, value = %" PRIu16 "", section, key, value);
 	return (value);
 }
 
@@ -148,12 +148,12 @@ uint32_t Settings::getU32(const char section[], const char key[], const uint32_t
 {
 	uint32_t value;
 	esp_err_t error = nvs_get_u32(Impl::my_handle, key, &value);
-	if (error != ESP_OK)
+	if (error not_eq ESP_OK)
 	{
 		value = defaultValue;
 		Settings::setU32(section, key, value);
 	}
-	ESP_LOGI(TAG, "getU32, section = %s, key = %s, value = %u", section, key, value);
+	ESP_LOGI(TAG, "getU32, section = %s, key = %s, value = %" PRIu32 "", section, key, value);
 	return (value);
 }
 
@@ -161,12 +161,12 @@ uint64_t Settings::getU64(const char section[], const char key[], const uint64_t
 {
 	uint64_t value;
 	esp_err_t error = nvs_get_u64(Impl::my_handle, key, &value);
-	if (error != ESP_OK)
+	if (error not_eq ESP_OK)
 	{
 		value = defaultValue;
 		Settings::setU64(section, key, value);
 	}
-	ESP_LOGI(TAG, "getU64, section = %s, key = %s, value = %llu", section, key, value);
+	ESP_LOGI(TAG, "getU64, section = %s, key = %s, value = %" PRIu64 "", section, key, value);
 	return (value);
 }
 
@@ -174,12 +174,12 @@ uint64_t Settings::getX64(const char section[], const char key[], const uint64_t
 {
 	uint64_t value;
 	esp_err_t error = nvs_get_u64(Impl::my_handle, key, &value);
-	if (error != ESP_OK)
+	if (error not_eq ESP_OK)
 	{
 		value = defaultValue;
 		Settings::setX64(section, key, value);
 	}
-	ESP_LOGI(TAG, "getX64, section = %s, key = %s, value = %llX", section, key, value);
+	ESP_LOGI(TAG, "getX64, section = %s, key = %s, value = %" PRIx64 "", section, key, value);
 	return (value);
 }
 
@@ -187,7 +187,7 @@ size_t Settings::getString(const char section[], const char key[], const char de
 {
 
 	esp_err_t error = nvs_get_str(Impl::my_handle, key, captionOut, &size);
-	if (error != ESP_OK)
+	if (error not_eq ESP_OK)
 	{
 		if (defaultValue == nullptr)
 		{
@@ -202,83 +202,83 @@ size_t Settings::getString(const char section[], const char key[], const char de
 
 void Settings::setS8(const char section[], const char key[], const int8_t value)
 {
-	ESP_LOGI(TAG, "setS8, section = %s, key = %s, value = %i", section, key, value);
+	ESP_LOGI(TAG, "setS8, section = %s, key = %s, value = %" PRIi8 "", section, key, value);
 	nvs_set_i8(Impl::my_handle, key, value);
 	ESP_LOGD(TAG, "Committing updates in NVS ... ");
 	esp_err_t err = nvs_commit(Impl::my_handle);
-	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err != ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
+	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err not_eq ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
 }
 
 void Settings::setS16(const char section[], const char key[], const int16_t value)
 {
-	ESP_LOGI(TAG, "setS16, section = %s, key = %s, value = %i", section, key, value);
+	ESP_LOGI(TAG, "setS16, section = %s, key = %s, value = %" PRIi16 "", section, key, value);
 	nvs_set_i16(Impl::my_handle, key, value);
 	ESP_LOGD(TAG, "Committing updates in NVS ... ");
 	esp_err_t err = nvs_commit(Impl::my_handle);
-	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err != ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
+	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err not_eq ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
 }
 
 void Settings::setS32(const char section[], const char key[], const int32_t value)
 {
-	ESP_LOGI(TAG, "setS32, section = %s, key = %s, value = %i", section, key, value);
+	ESP_LOGI(TAG, "setS32, section = %s, key = %s, value = %" PRIi32 "", section, key, value);
 	nvs_set_i32(Impl::my_handle, key, value);
 	ESP_LOGD(TAG, "Committing updates in NVS ... ");
 	esp_err_t err = nvs_commit(Impl::my_handle);
-	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err != ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
+	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err not_eq ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
 }
 
 void Settings::setS64(const char section[], const char key[], const int64_t value)
 {
-	ESP_LOGI(TAG, "setS64, section = %s, key = %s, value = %lli", section, key, value);
+	ESP_LOGI(TAG, "setS64, section = %s, key = %s, value = %" PRIi64 "", section, key, value);
 	nvs_set_i64(Impl::my_handle, key, value);
 	ESP_LOGD(TAG, "Committing updates in NVS ... ");
 	esp_err_t err = nvs_commit(Impl::my_handle);
-	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err != ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
+	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err not_eq ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
 }
 
 void Settings::setU8(const char section[], const char key[], const uint8_t value)
 {
-	ESP_LOGI(TAG, "setU8, section = %s, key = %s, value = %u", section, key, value);
+	ESP_LOGI(TAG, "setU8, section = %s, key = %s, value = %" PRIu8 "", section, key, value);
 	nvs_set_u8(Impl::my_handle, key, value);
 	ESP_LOGD(TAG, "Committing updates in NVS ... ");
 	esp_err_t err = nvs_commit(Impl::my_handle);
-	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err != ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
+	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err not_eq ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
 }
 
 void Settings::setU16(const char section[], const char key[], const uint16_t value)
 {
-	ESP_LOGI(TAG, "setU16, section = %s, key = %s, value = %u", section, key, value);
+	ESP_LOGI(TAG, "setU16, section = %s, key = %s, value = %" PRIu16 "", section, key, value);
 	nvs_set_u16(Impl::my_handle, key, value);
 	ESP_LOGD(TAG, "Committing updates in NVS ... ");
 	esp_err_t err = nvs_commit(Impl::my_handle);
-	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err != ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
+	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err not_eq ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
 }
 
 void Settings::setU32(const char section[], const char key[], const uint32_t value)
 {
-	ESP_LOGI(TAG, "setU32, section = %s, key = %s, value = %u", section, key, value);
+	ESP_LOGI(TAG, "setU32, section = %s, key = %s, value = %" PRIu32 "", section, key, value);
 	nvs_set_u32(Impl::my_handle, key, value);
 	ESP_LOGD(TAG, "Committing updates in NVS ... ");
 	esp_err_t err = nvs_commit(Impl::my_handle);
-	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err != ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
+	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err not_eq ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
 }
 
 void Settings::setU64(const char section[], const char key[], const uint64_t value)
 {
-	ESP_LOGI(TAG, "setU64, section = %s, key = %s, value = %llu", section, key, value);
+	ESP_LOGI(TAG, "setU64, section = %s, key = %s, value = %" PRIu64 "", section, key, value);
 	nvs_set_u64(Impl::my_handle, key, value);
 	ESP_LOGD(TAG, "Committing updates in NVS ... ");
 	esp_err_t err = nvs_commit(Impl::my_handle);
-	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err != ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
+	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err not_eq ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
 }
 
 void Settings::setX64(const char section[], const char key[], const uint64_t value)
 {
-	ESP_LOGI(TAG, "setX64, section = %s, key = %s, value = %llX", section, key, value);
+	ESP_LOGI(TAG, "setX64, section = %s, key = %s, value = %" PRIx64 "", section, key, value);
 	nvs_set_u64(Impl::my_handle, key, value);
 	ESP_LOGD(TAG, "Committing updates in NVS ... ");
 	esp_err_t err = nvs_commit(Impl::my_handle);
-	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err != ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
+	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err not_eq ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
 }
 
 void Settings::setString(const char section[], const char key[], const char value[])
@@ -287,7 +287,7 @@ void Settings::setString(const char section[], const char key[], const char valu
 	nvs_set_str(Impl::my_handle, key, value);
 	ESP_LOGD(TAG, "Committing updates in NVS ... ");
 	esp_err_t err = nvs_commit(Impl::my_handle);
-	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err != ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
+	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err not_eq ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
 }
 
 void Settings::eraseString(const char section[], const char key[])
@@ -296,7 +296,7 @@ void Settings::eraseString(const char section[], const char key[])
 	nvs_erase_key(Impl::my_handle, key);
 	ESP_LOGD(TAG, "Committing updates in NVS ... ");
 	esp_err_t err = nvs_commit(Impl::my_handle);
-	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err != ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
+	ESP_LOGI(TAG, "Result: %s, %i, %s ", (err not_eq ESP_OK) ? "Failed!" : "Done", err, esp_err_to_name(err));
 }
 
 
