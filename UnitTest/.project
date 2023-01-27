@@ -3794,6 +3794,11 @@
 			<location>/home/franz/esp-idf-v5.0/components/lwip/lwip/src/netif/ppp/vj.c</location>
 		</link>
 		<link>
+			<name>build/ide/esp_idf_components/unity/unity/extras/fixture/src/unity_fixture.c</name>
+			<type>1</type>
+			<location>/home/franz/esp-idf-v5.0/components/unity/unity/extras/fixture/src/unity_fixture.c</location>
+		</link>
+		<link>
 			<name>build/ide/esp_idf_components/efuse/src/efuse_controller/keys/without_key_purposes/three_key_blocks/esp_efuse_api_key.c</name>
 			<type>1</type>
 			<location>/home/franz/esp-idf-v5.0/components/efuse/src/efuse_controller/keys/without_key_purposes/three_key_blocks/esp_efuse_api_key.c</location>
