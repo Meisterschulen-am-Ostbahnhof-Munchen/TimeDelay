@@ -11,26 +11,17 @@
 #include "unity.h"
 #include "settingsNVS.h"
 #include "esp_log.h"
+#include "sdkconfig.h"
 
 
 static const char *TAG = "test_settingsNVS"; // @suppress("Unused variable declaration in file scope")
 
 
-/*
- *
- * you must add this into unity_config.h
- *
- * #ifdef CONFIG_UNITY_SUPPORT_64
- * #define UNITY_SUPPORT_64
- * #endif
- *
- *
- *
- */
 
 
-#if !defined(UNITY_SUPPORT_64)
-	#error "UNITY_SUPPORT_64 need"
+
+#if !defined(CONFIG_UNITY_ENABLE_64BIT)
+	#error "CONFIG_UNITY_ENABLE_64BIT need"
 #endif
 
 
@@ -62,9 +53,9 @@ TEST_CASE("int8_t", "[int8_t]")
 	setS8("CF-A", "byte", q);
     int8_t r = -9;
     TEST_ASSERT_NOT_EQUAL(q, r);
-    ESP_LOGI(TAG, "before: %i %i", q, r);
+    ESP_LOGI(TAG, "before: %" PRIi8 " %" PRIi8 "", q, r);
     r = getS8("CF-A", "byte", r);
-    ESP_LOGI(TAG, "after: %i %i", q, r);
+    ESP_LOGI(TAG, "after: %" PRIi8 " %" PRIi8 "", q, r);
     TEST_ASSERT_EQUAL_INT8(q, r);
 }
 
@@ -74,9 +65,9 @@ TEST_CASE("int16_t", "[int16_t]")
     setS16("CF-A", "word", q);
     int16_t r = -9;
     TEST_ASSERT_NOT_EQUAL(q, r);
-    ESP_LOGI(TAG, "before: %i %i", q, r);
+    ESP_LOGI(TAG, "before: %" PRIi16 " %" PRIi16 "", q, r);
     r = getS16("CF-A", "word", r);
-    ESP_LOGI(TAG, "after: %i %i", q, r);
+    ESP_LOGI(TAG, "after: %" PRIi16 " %" PRIi16 "", q, r);
     TEST_ASSERT_EQUAL_INT16(q, r);
 }
 
@@ -86,9 +77,9 @@ TEST_CASE("int32_t", "[int32_t]")
     setS32("CF-A", "dword", q);
     int32_t r = -9;
     TEST_ASSERT_NOT_EQUAL(q, r);
-    ESP_LOGI(TAG, "before: %i %i", q, r);
+    ESP_LOGI(TAG, "before: %" PRIi32 " %" PRIi32 "", q, r);
     r = getS32("CF-A", "dword", r);
-    ESP_LOGI(TAG, "after: %i %i", q, r);
+    ESP_LOGI(TAG, "after: %" PRIi32 " %" PRIi32 "", q, r);
     TEST_ASSERT_EQUAL_INT32(q, r);
 }
 
@@ -98,10 +89,10 @@ TEST_CASE("int64_t", "[int64_t]")
 	setS64("CF-A", "qword", q);
     int64_t r = -9;
     TEST_ASSERT_NOT_EQUAL(q, r);
-    ESP_LOGI(TAG, "before: %lli %lli", q, r);
+    ESP_LOGI(TAG, "before: %" PRIi64 " %" PRIi64 "", q, r);
     r = getS64("CF-A", "qword", r);
 
-    ESP_LOGI(TAG, "after: %lli %lli", q, r);
+    ESP_LOGI(TAG, "after: %" PRIi64 " %" PRIi64 "", q, r);
 
 
     const void* pq = &q;
@@ -119,9 +110,9 @@ TEST_CASE("uint8_t", "[uint8_t]")
     setU8("CF-A", "ubyte", q);
     uint8_t r = 9;
     TEST_ASSERT_NOT_EQUAL(q, r);
-    ESP_LOGI(TAG, "before: %i %i", q, r);
+    ESP_LOGI(TAG, "before: %" PRIu8 " %" PRIu8 "", q, r);
     r = getU8("CF-A", "ubyte", r);
-    ESP_LOGI(TAG, "after: %i %i", q, r);
+    ESP_LOGI(TAG, "after: %" PRIu8 " %" PRIu8 "", q, r);
     TEST_ASSERT_EQUAL_UINT8(q, r);
 }
 
@@ -131,9 +122,9 @@ TEST_CASE("uint16_t", "[uint16_t]")
     setU16("CF-A", "uword", q);
     uint16_t r = 9;
     TEST_ASSERT_NOT_EQUAL(q, r);
-    ESP_LOGI(TAG, "before: %i %i", q, r);
+    ESP_LOGI(TAG, "before: %" PRIu16 " %" PRIu16 "", q, r);
     r = getU16("CF-A", "uword", r);
-    ESP_LOGI(TAG, "after: %i %i", q, r);
+    ESP_LOGI(TAG, "after: %" PRIu16 " %" PRIu16 "", q, r);
     TEST_ASSERT_EQUAL_UINT16(q, r);
 }
 
@@ -143,9 +134,9 @@ TEST_CASE("uint32_t", "[uint32_t]")
     setU32("CF-A", "udword", q);
     uint32_t r = 9;
     TEST_ASSERT_NOT_EQUAL(q, r);
-    ESP_LOGI(TAG, "before: %i %i", q, r);
+    ESP_LOGI(TAG, "before: %" PRIu32 " %" PRIu32 "", q, r);
     r = getU32("CF-A", "udword", r);
-    ESP_LOGI(TAG, "after: %i %i", q, r);
+    ESP_LOGI(TAG, "after: %" PRIu32 " %" PRIu32 "", q, r);
     TEST_ASSERT_EQUAL_UINT32(q, r);
 }
 
@@ -155,10 +146,10 @@ TEST_CASE("uint64_t", "[uint64_t]")
     setU64("CF-A", "uqword", q);
     uint64_t r = 9;
     TEST_ASSERT_NOT_EQUAL(q, r);
-    ESP_LOGI(TAG, "before: %lli %lli", q, r);
+    ESP_LOGI(TAG, "before: %" PRIu64 " %" PRIu64 "", q, r);
     r = getU64("CF-A", "uqword", r);
 
-    ESP_LOGI(TAG, "after: %lli %lli", q, r);
+    ESP_LOGI(TAG, "after: %" PRIu64 " %" PRIu64 "", q, r);
 
 
     const void* pq = &q;
