@@ -9,13 +9,16 @@
 
 template<class Item> 
 List<Item>::List(long size) : _size(size), _count(0) {
+	//a lot to improve here, like make this an Unique pointer and so on ...
     _items = new Item[size]; 
 }
 
 template<class Item>
-List<Item>::List(List<Item> &list) : _size(list._size), _count(list._count) {
-	_items = list._items;
-}
+List<Item>::List(List<Item> &list)
+: _size(list._size)
+, _count(list._count)
+, _items(list._items)
+{}
 
 
 template<class Item> 
