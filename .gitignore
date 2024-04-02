@@ -36,3 +36,5 @@
 *.old~main
 
 TestTimeDelay/build/
+
+blink_cxx/managed_components/
