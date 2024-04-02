@@ -38,3 +38,5 @@
 TestTimeDelay/build/
 
 blink_cxx/managed_components/
+
+esp_timer_cxx/managed_components/
