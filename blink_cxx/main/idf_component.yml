@@ -1,5 +1,4 @@
 dependencies:
-  espressif/esp-idf-cxx:
-    version: ^1.0.0
+  espressif/esp-idf-cxx: "^1.0.2-beta"
   idf:
     version: '>=5.0'
